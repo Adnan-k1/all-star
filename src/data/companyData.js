@@ -1,8 +1,8 @@
 import Renandaimg from "../assets/images/Renanda.png";
 import Nandaimg from "../assets/images/Nanda.png";
 import Boshaimg from "../assets/images/boscha.png";
-import arryimg from "../assets/images/Arry.png";
-import idingimg from "../assets/images/Iding.png";
+import arryimg from "../assets/images/arry.png";
+import idingimg from "../assets/images/iding.png";
 
 export const navLinks = [
   { name: "Home", href: "#home" },
