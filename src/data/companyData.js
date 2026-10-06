@@ -82,7 +82,7 @@ export const teamData = {
       id: 2,
       name: "Renanda Bachtar",
       role: "Business Director",
-      description: "Driving growth and strategic partnerships that elevate our brand and expand our global footprint.",
+      description: "Driving growth and strategic partnerships that elevate your brand and expand your global footprint.",
       image: Renandaimg,
     },
     {
