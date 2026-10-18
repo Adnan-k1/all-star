@@ -105,13 +105,15 @@ export default function Hero() {
                 className="relative w-[58%] h-[58%] object-contain drop-shadow-[0_8px_30px_rgba(233,195,73,0.35)]"
               />
             ) : (
-              <span className="relative font-serif italic text-3xl text-[#e9c349]/70">LOGO</span>
+              <span className="relative font-serif italic text-3xl text-[#e9c349]/70">
+                LOGO
+              </span>
             )}
           </div>
         </motion.div>
       </div>
 
-      {/* Layanan */}
+      {/* Layanan (Tulisan bawah dibuat center) */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -119,7 +121,10 @@ export default function Hero() {
         className="relative z-10 w-full max-w-[1440px] mx-auto border-t border-[#e9c349]/25 py-6 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4"
       >
         {services.map((s) => (
-          <div key={s} className="flex items-center gap-3 text-sm text-[#c4c6cf]">
+          <div
+            key={s}
+            className="flex items-center justify-center gap-3 text-sm text-[#c4c6cf] text-center"
+          >
             <span className="w-1.5 h-1.5 rounded-full bg-[#e9c349] shrink-0" />
             {s}
           </div>
