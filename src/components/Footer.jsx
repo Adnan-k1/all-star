@@ -4,8 +4,8 @@ export default function Footer() {
       <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
         {/* Brand Logo & Copyright */}
         <div className="flex flex-col items-center md:items-start gap-3">
-          <div className="text-2xl font-bold font-serif text-[#e9c349]">Allstar Enterprise</div>
-          <p className="text-sm text-[#c4c6cf]/80">© 2026 Allstar Enterprise. Raising the Stars.</p>
+          <div className="text-2xl font-bold font-serif text-[#e9c349]">Allstars Enterprise</div>
+          <p className="text-sm text-[#c4c6cf]/80">© 2026 Allstars Enterprise. Rising the Stars.</p>
         </div>
 
         {/* Navigation Links */}

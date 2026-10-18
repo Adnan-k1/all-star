@@ -5,10 +5,10 @@ import logo from "/src/assets/images/logo.png";
 const LOGO_SRC = logo;
 
 const SERVICES = [
-  "Digital marketing",
-  "Talent management",
-  "Professional event organizer",
-  "Entertainment",
+  "DIGITAL MARKETING",
+  "TALENT MANAGEMENT",
+  "PROFESSIONAL EVENT ORGANIZER",
+  "ENTERTAINMENT",
 ];
 
 const ease = [0.16, 1, 0.3, 1];

@@ -67,7 +67,7 @@ export const teamData = {
     name: "Nanda Persada",
     role: "President Director / CEO",
     tagline: "VISIONARY LEADER",
-    description: "Leading Allstar Enterprise with over 20 years of experience in the entertainment and event industry, shaping the future of luxury experiences.",
+    description: "Leading Allstars Enterprise with over 20 years of experience in the entertainment and event industry, shaping the future of luxury experiences.",
     image: Nandaimg,
   },
   directors: [
