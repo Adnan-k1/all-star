@@ -139,7 +139,6 @@ export const translations = {
       privacy: "Privacy Policy",
       terms: "Terms of Service",
       contact: "Contact",
-      press: "Press Kit",
     },
 
     showcase: {
@@ -148,17 +147,28 @@ export const translations = {
       titleLine2: "Gallery",
       quote: "Where vision meets precision, and moments become legacies.",
       categories: {},
-      servicesHeading: "Three Disciplines, One Team.",
+      scroll: "Scroll",
+      stats: [
+        { value: "150+", label: "Iconic events delivered" },
+        { value: "80+", label: "Brand partners" },
+        { value: "12", label: "Years of experience" },
+        { value: "25", label: "Awards won" },
+      ],
+      selectedWorks: "Selected Works",
+      coreLabel: "Our Core Competencies",
+      servicesHeading: "Expertise Redefined",
       services: [
-        { title: "Event Organizer & Production", text: "Festivals, gala dinners and corporate summits, run end to end by one crew." },
-        { title: "Integrated Marketing Campaigns", text: "One story told across every channel, with results you can measure." },
-        { title: "Commercial & Content Production", text: "Film and video made for cinema, broadcast and digital screens." },
+        { title: "Event Organizer & Production", text: "Full-scale execution of festivals, gala dinners, and corporate summits with unmatched technical precision." },
+        { title: "Integrated Marketing Campaign", text: "Omni-channel storytelling that captures hearts and minds, driving measurable brand growth." },
+        { title: "Commercial & Content Production", text: "Award-winning visual content tailored for cinema, broadcast, and digital platforms." },
       ],
       crewAlt: "Production crew at work",
-      crewCaption: "150+ events delivered.",
-      ctaTitle: "Ready to Make History?",
+      crewLabel: "Proven Track Record",
+      crewCaption: "150+ Iconic Events Delivered",
+      ctaTitle: "Ready to make history?",
       ctaText:
-        "Tell us about the event or campaign you have in mind. Allstars Enterprise will reply with a first plan.",
+        "Join the elite portfolio of brands that have chosen Allstars Enterprise to define their legacy.",
+      ctaButton: "Request a Consultation",
     },
   },
 
@@ -335,7 +345,6 @@ export const translations = {
       privacy: "Kebijakan Privasi",
       terms: "Syarat Layanan",
       contact: "Kontak",
-      press: "Press Kit",
     },
 
     showcase: {
@@ -351,17 +360,28 @@ export const translations = {
         "Digital Activation": "Aktivasi Digital",
         "Social & KOL": "Sosial & KOL",
       },
-      servicesHeading: "Tiga Keahlian, Satu Tim.",
+      scroll: "Gulir",
+      stats: [
+        { value: "150+", label: "Event ikonik terselesaikan" },
+        { value: "80+", label: "Mitra brand" },
+        { value: "12", label: "Tahun pengalaman" },
+        { value: "25", label: "Penghargaan diraih" },
+      ],
+      selectedWorks: "Karya Pilihan",
+      coreLabel: "Keahlian Inti Kami",
+      servicesHeading: "Keahlian yang Didefinisikan Ulang",
       services: [
-        { title: "Event Organizer & Produksi", text: "Festival, gala dinner, dan pertemuan korporat, ditangani dari awal sampai akhir oleh satu tim." },
-        { title: "Kampanye Pemasaran Terpadu", text: "Satu cerita yang disampaikan di semua kanal, dengan hasil yang bisa diukur." },
-        { title: "Produksi Komersial & Konten", text: "Film dan video untuk bioskop, penyiaran, dan layar digital." },
+        { title: "Event Organizer & Produksi", text: "Eksekusi festival, gala dinner, dan pertemuan korporat berskala penuh dengan presisi teknis yang tak tertandingi." },
+        { title: "Kampanye Pemasaran Terpadu", text: "Penceritaan omni-channel yang menyentuh hati dan pikiran, mendorong pertumbuhan brand yang terukur." },
+        { title: "Produksi Komersial & Konten", text: "Konten visual pemenang penghargaan yang disesuaikan untuk bioskop, penyiaran, dan platform digital." },
       ],
       crewAlt: "Tim produksi sedang bekerja",
-      crewCaption: "150+ event telah kami selesaikan.",
-      ctaTitle: "Siap Menciptakan Sejarah?",
+      crewLabel: "Rekam Jejak Terbukti",
+      crewCaption: "150+ Event Ikonik Terselesaikan",
+      ctaTitle: "Siap menciptakan sejarah?",
       ctaText:
-        "Ceritakan acara atau kampanye yang Anda inginkan. Allstars Enterprise akan membalas dengan rencana awal.",
+        "Bergabunglah dengan portofolio brand elit yang telah memilih Allstars Enterprise untuk menentukan warisan mereka.",
+      ctaButton: "Minta Konsultasi",
       projects: {
         1: {
           title: "Royal Gala Symphony",

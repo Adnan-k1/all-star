@@ -9,6 +9,7 @@ export default function ShowcasePage() {
   const reduce = useReducedMotion();
   const { t, lang } = useLanguage();
   const services = t("showcase.services");
+  const stats = t("showcase.stats");
   const categoryLabel = (c) => t(`showcase.categories.${c}`, c);
   // Judul/deskripsi/badge proyek: terjemahan dicari per id, cadangannya teks dari data
   const field = (p, k) => t(`showcase.projects.${p.id}.${k}`, p[k]);
@@ -36,6 +37,10 @@ export default function ShowcasePage() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#111415] via-[#111415]/60 to-[#111415]/20"></div>
 
+        <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-white/60 hidden md:block">
+          {t("showcase.scroll")} ↓
+        </span>
+
         <div className="relative w-full max-w-[1440px] mx-auto px-6 md:px-16 pb-14 md:pb-20">
           <h1 className="font-serif font-bold text-[#f3f1ea] leading-[0.95] tracking-tight text-[3.25rem] sm:text-7xl md:text-[9rem]">
             <span className="block overflow-hidden pb-2">
@@ -52,7 +57,7 @@ export default function ShowcasePage() {
 
           <div className="mt-8 md:mt-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-t border-white/20 pt-5">
             <p className="font-serif italic text-lg md:text-xl text-[#d0d2d8] max-w-md leading-snug">
-              {t("showcase.quote")}
+              &ldquo;{t("showcase.quote")}&rdquo;
             </p>
             <div className="md:text-right">
               <p className="font-serif italic text-xl md:text-2xl text-[#e9c349]">Rising the Stars</p>
@@ -62,8 +67,22 @@ export default function ShowcasePage() {
         </div>
       </section>
 
+      {/* ================= STATISTIK ================= */}
+      <section className="px-6 md:px-16 max-w-[1440px] mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 border-b border-white/10 py-10">
+          {stats.map((item) => (
+            <div key={item.label}>
+              <p className="font-serif text-4xl md:text-5xl text-white">{item.value}</p>
+              <p className="mt-1 text-sm text-[#a9acb4]">{item.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ================= FILTER + GRID ================= */}
       <section className="px-6 md:px-16 py-16 md:py-24 max-w-[1440px] mx-auto">
+        <h2 className="font-serif text-3xl md:text-4xl text-white mb-8">{t("showcase.selectedWorks")}</h2>
+
         {/* Tab teks sederhana, garis bawah menandai yang aktif */}
         <div className="flex flex-wrap gap-x-8 gap-y-3 mb-12 border-b border-white/10">
           {showcaseCategories.map((category) => {
@@ -136,6 +155,7 @@ export default function ShowcasePage() {
         <section className="px-6 md:px-16 pb-24 md:pb-32 max-w-[1440px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 border-t border-white/10 pt-16 md:pt-24">
             <div className="lg:col-span-7">
+              <p className="text-sm text-[#e9c349] mb-3">{t("showcase.coreLabel")}</p>
               <h2 className="font-serif text-4xl md:text-6xl text-[#f3f1ea] leading-tight max-w-xl">
                 {t("showcase.servicesHeading")}
               </h2>
@@ -158,8 +178,9 @@ export default function ShowcasePage() {
                 alt={t("showcase.crewAlt")}
                 className="w-full aspect-[4/5] object-cover rounded-sm"
               />
-              <figcaption className="mt-3 text-sm text-[#a9acb4]">
-                {t("showcase.crewCaption")}
+              <figcaption className="mt-3">
+                <p className="text-sm text-[#e9c349]">{t("showcase.crewLabel")}</p>
+                <p className="text-sm text-[#a9acb4]">{t("showcase.crewCaption")}</p>
               </figcaption>
             </figure>
           </div>
@@ -185,7 +206,7 @@ export default function ShowcasePage() {
               rel="noopener noreferrer"
               className="inline-block bg-[#e9c349] text-[#111415] font-semibold px-8 py-4 rounded-sm hover:bg-[#f1d170] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e9c349]"
             >
-              {t("common.contactUs")}
+              {t("showcase.ctaButton")}
             </a>
             <ul className="flex gap-6 text-sm text-[#a9acb4]">
               {getSocials(lang).map((item) => (

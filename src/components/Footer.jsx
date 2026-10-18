@@ -19,7 +19,6 @@ export default function Footer() {
           <a href="#privacy" className={linkClass}>{t("footer.privacy")}</a>
           <a href="#terms" className={linkClass}>{t("footer.terms")}</a>
           <a href="#contact" className={linkClass}>{t("footer.contact")}</a>
-          <a href="#press" className={linkClass}>{t("footer.press")}</a>
         </nav>
 
         {/* Sosial media: WhatsApp, Instagram, LinkedIn */}
@@ -40,4 +39,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+}git add .
