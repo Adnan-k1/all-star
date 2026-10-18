@@ -1,20 +1,17 @@
 import { motion, useReducedMotion } from "framer-motion";
 import logo from "/src/assets/images/logo.png";
+import { useLanguage } from "../context/LanguageContext";
+import { getWaLink, getSocials } from "../data/contact";
 
 // Kalau diisi null, akan tampil placeholder "LOGO"
 const LOGO_SRC = logo;
-
-const SERVICES = [
-  "DIGITAL MARKETING",
-  "TALENT MANAGEMENT",
-  "PROFESSIONAL EVENT ORGANIZER",
-  "ENTERTAINMENT",
-];
 
 const ease = [0.16, 1, 0.3, 1];
 
 export default function Hero() {
   const reduceMotion = useReducedMotion();
+  const { t, lang } = useLanguage();
+  const services = t("hero.services");
 
   return (
     <section
@@ -47,28 +44,39 @@ export default function Hero() {
           </div>
 
           <h1 className="font-serif font-normal text-5xl sm:text-6xl lg:text-7xl leading-[1.08] tracking-tight text-white">
-            Driven by Experience,
+            {t("hero.line1")}
             <br />
-            <span className="italic text-[#e9c349]">Powered by Creativity.</span>
+            <span className="italic text-[#e9c349]">{t("hero.line2")}</span>
           </h1>
 
           <p className="text-base md:text-lg text-[#c4c6cf] max-w-xl leading-relaxed font-light">
-            A full-service marketing communications and entertainment agency built on decades of combined industry experience, translating deep insights into extraordinary outcomes.
+            {t("hero.text")}
           </p>
 
-          <div className="flex flex-wrap gap-4 pt-2">
+          {/* Satu tombol utama + tautan sosial */}
+          <div className="pt-2 flex flex-col items-start gap-5">
             <a
-              href="#process"
+              href={getWaLink(lang)}
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-[#e9c349] text-[#111415] text-sm font-semibold px-8 py-4 rounded hover:bg-[#f2d062] transition-colors text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e9c349]"
             >
-              Mulai Perjalanan
+              {t("common.contactUs")}
             </a>
-            <a
-              href="#about"
-              className="border border-[#e9c349]/60 text-[#e9c349] text-sm font-semibold px-8 py-4 rounded hover:bg-[#e9c349]/10 transition-colors text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e9c349]"
-            >
-              Pelajari Lebih Lanjut
-            </a>
+            <ul className="flex gap-6 text-sm text-[#c4c6cf]">
+              {getSocials(lang).map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#e9c349] hover:underline underline-offset-4 transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </motion.div>
 
@@ -80,31 +88,24 @@ export default function Hero() {
           className="md:col-span-5 flex items-center justify-center"
         >
           <div className="relative flex items-center justify-center w-72 h-72 sm:w-96 sm:h-96 lg:w-[30rem] lg:h-[30rem]">
-            {/* Cahaya emas di belakang logo */}
             <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(233,195,73,0.28)_0%,rgba(233,195,73,0.08)_45%,transparent_70%)] blur-2xl" />
-
-            {/* Cincin putus-putus berputar pelan (satu-satunya gerakan terus-menerus) */}
             <motion.div
               aria-hidden
               className="absolute inset-0 rounded-full border border-dashed border-[#e9c349]/35"
               animate={reduceMotion ? undefined : { rotate: 360 }}
               transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
             />
-            {/* Cincin solid */}
             <div className="absolute inset-6 rounded-full border border-[#e9c349]/25" />
-            {/* Piringan logo */}
             <div className="absolute inset-12 rounded-full bg-[#111415]/70 backdrop-blur-md border border-[#e9c349]/40 shadow-[0_0_80px_rgba(233,195,73,0.15)]" />
 
             {LOGO_SRC ? (
               <img
                 src={LOGO_SRC}
-                alt="Logo Allstars Enterprise"
+                alt={t("hero.logoAlt")}
                 className="relative w-[58%] h-[58%] object-contain drop-shadow-[0_8px_30px_rgba(233,195,73,0.35)]"
               />
             ) : (
-              <span className="relative font-serif italic text-3xl text-[#e9c349]/70">
-                LOGO
-              </span>
+              <span className="relative font-serif italic text-3xl text-[#e9c349]/70">LOGO</span>
             )}
           </div>
         </motion.div>
@@ -117,7 +118,7 @@ export default function Hero() {
         transition={{ duration: 0.8, delay: 0.7 }}
         className="relative z-10 w-full max-w-[1440px] mx-auto border-t border-[#e9c349]/25 py-6 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4"
       >
-        {SERVICES.map((s) => (
+        {services.map((s) => (
           <div key={s} className="flex items-center gap-3 text-sm text-[#c4c6cf]">
             <span className="w-1.5 h-1.5 rounded-full bg-[#e9c349] shrink-0" />
             {s}

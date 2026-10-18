@@ -1,15 +1,23 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { servicesData } from "../data/companyData";
+import { useLanguage } from "../context/LanguageContext";
 
 const AUTOPLAY_MS = 4000;
 const RESUME_AFTER_TOUCH_MS = 3000;
 const SWIPE_DISTANCE = 50; // px minimal untuk dianggap swipe
 const DRAG_THRESHOLD = 8; // px minimal untuk dianggap drag (bukan klik)
 
+// Mengisi {i}, {n}, {title} di dalam teks terjemahan
+const fmt = (str, vars) => str.replace(/\{(\w+)\}/g, (_, k) => vars[k]);
+
 export default function Services() {
+  const { t } = useLanguage();
   const total = servicesData.length;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+
+  // Judul/deskripsi layanan: terjemahan per id, cadangannya teks dari data
+  const sText = (s, k) => t(`services.items.${s.id}.${k}`, s[k]);
 
   // Gesture disimpan di ref agar tidak kena nilai state yang basi
   const startX = useRef(0);
@@ -89,18 +97,18 @@ export default function Services() {
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-14 space-y-4">
           <h2 className="text-3xl md:text-5xl font-serif leading-tight">
-            Crafting <span className="text-[#e9c349] italic">Unforgettable</span> Experiences.
+            {t("services.headlineStart")}{" "}
+            <span className="text-[#e9c349] italic">{t("services.headlineAccent")}</span>{" "}
+            {t("services.headlineEnd")}
           </h2>
-          <p className="text-sm md:text-base text-[#c4c6cf] font-light">
-            From concept to curtain call, we elevate every detail into an iconic moment.
-          </p>
+          <p className="text-sm md:text-base text-[#c4c6cf] font-light">{t("services.sub")}</p>
         </div>
 
         {/* Carousel */}
         <div
           role="region"
           aria-roledescription="carousel"
-          aria-label="Layanan kami"
+          aria-label={t("services.ariaLabel")}
           tabIndex={0}
           style={{ touchAction: "pan-y" }}
           className="relative flex items-center justify-center min-h-[440px] my-8 select-none cursor-grab active:cursor-grabbing focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e9c349]/50 rounded-2xl"
@@ -121,7 +129,7 @@ export default function Services() {
           {/* Panah kiri */}
           <button
             onClick={prevSlide}
-            aria-label="Layanan sebelumnya"
+            aria-label={t("services.prev")}
             className="absolute left-2 md:left-8 z-30 w-12 h-12 rounded-full bg-[#161a1b]/80 border border-[#e9c349]/40 text-[#e9c349] flex items-center justify-center hover:bg-[#e9c349] hover:text-[#111415] transition-colors cursor-pointer backdrop-blur-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#e9c349]"
           >
             <span className="material-symbols-outlined text-2xl" aria-hidden="true">
@@ -150,7 +158,7 @@ export default function Services() {
                   key={service.id ?? index}
                   role="group"
                   aria-roledescription="slide"
-                  aria-label={`${index + 1} dari ${total}`}
+                  aria-label={fmt(t("services.slideOf"), { i: index + 1, n: total })}
                   aria-hidden={!isCenter}
                   onClick={() => !isCenter && goTo(index)}
                   style={{ transform: `translateX(${translate}) scale(${scale})` }}
@@ -174,9 +182,9 @@ export default function Services() {
                       </span>
 
                       <div className="space-y-3">
-                        <h3 className="text-xl font-semibold text-[#e1e3e4]">{service.title}</h3>
+                        <h3 className="text-xl font-semibold text-[#e1e3e4]">{sText(service, "title")}</h3>
                         <p className="text-sm text-[#c4c6cf] leading-relaxed font-light line-clamp-5">
-                          {service.description}
+                          {sText(service, "description")}
                         </p>
                       </div>
                     </div>
@@ -186,7 +194,7 @@ export default function Services() {
                       tabIndex={isCenter ? 0 : -1}
                       className="inline-flex items-center gap-2 text-sm font-semibold text-[#e9c349] hover:underline pt-4 border-t border-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e9c349]"
                     >
-                      Daftar sekarang
+                      {t("services.cta")}
                       <span className="material-symbols-outlined text-base" aria-hidden="true">
                         arrow_forward
                       </span>
@@ -200,7 +208,7 @@ export default function Services() {
           {/* Panah kanan */}
           <button
             onClick={nextSlide}
-            aria-label="Layanan berikutnya"
+            aria-label={t("services.next")}
             className="absolute right-2 md:right-8 z-30 w-12 h-12 rounded-full bg-[#161a1b]/80 border border-[#e9c349]/40 text-[#e9c349] flex items-center justify-center hover:bg-[#e9c349] hover:text-[#111415] transition-colors cursor-pointer backdrop-blur-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#e9c349]"
           >
             <span className="material-symbols-outlined text-2xl" aria-hidden="true">
@@ -215,7 +223,7 @@ export default function Services() {
             <button
               key={service.id ?? index}
               onClick={() => goTo(index)}
-              aria-label={`Lihat layanan ${service.title ?? index + 1}`}
+              aria-label={fmt(t("services.viewService"), { title: sText(service, "title") })}
               aria-current={currentIndex === index}
               className="py-3 px-1 cursor-pointer group"
             >
@@ -233,13 +241,13 @@ export default function Services() {
         {/* Banner */}
         <div className="mt-14 p-6 md:p-8 rounded-2xl bg-[#161a1b]/80 border border-[#e9c349]/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <p className="text-sm md:text-base text-[#c4c6cf] max-w-3xl leading-relaxed font-light">
-            Kami menyelaraskan ide besar dengan eksekusi lintas platform yang menghubungkan emosi audiens dengan tujuan bisnis Anda.
+            {t("services.banner")}
           </p>
           <a
             href="#contact"
             className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#e9c349] text-[#111415] text-sm font-semibold hover:bg-[#f2d062] transition-colors shrink-0 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e9c349]"
           >
-            Konsultasikan event Anda
+            {t("services.bannerCta")}
             <span className="material-symbols-outlined text-base" aria-hidden="true">
               arrow_forward
             </span>

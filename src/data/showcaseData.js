@@ -1,3 +1,4 @@
+// Teks Inggris di sini jadi cadangan. Terjemahan Indonesia ada di translations.js (showcase.projects.<id>)
 export const showcaseCategories = [
   "All Works",
   "Event Production",

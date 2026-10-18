@@ -1,24 +1,27 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { navLinks } from "../data/companyData";
+import { useLanguage } from "../context/LanguageContext";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { t } = useLanguage();
   const isHomePage = location.pathname === "/";
 
   // Fungsi pengecekan status aktif
   const checkIsActive = (href) => {
-    // Jika rute adalah path halaman (misal: "/showcase")
     if (href.startsWith("/")) {
       return location.pathname === href;
     }
-    // Jika rute adalah section hash di Home (misal: "#home")
     if (isHomePage && href === "#home") {
       return location.pathname === "/" && !location.hash;
     }
     return false;
   };
+
+  const label = (link) => t(`nav.links.${link.key}`, link.name);
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-[#111415]/80 backdrop-blur-md border-b border-[#e9c349]/10">
@@ -48,7 +51,7 @@ export default function Navbar() {
                 to={link.href}
                 className={`transition-colors duration-300 py-1 ${activeClass}`}
               >
-                {link.name}
+                {label(link)}
               </Link>
             ) : (
               <a
@@ -56,31 +59,37 @@ export default function Navbar() {
                 href={isHomePage ? link.href : `/${link.href}`}
                 className={`transition-colors duration-300 py-1 ${activeClass}`}
               >
-                {link.name}
+                {label(link)}
               </a>
             );
           })}
         </nav>
 
-        {/* Action Button */}
-        <div className="hidden md:block">
+        {/* Bahasa + Action Button */}
+        <div className="hidden md:flex items-center gap-5">
+          <LanguageSwitcher />
           <a
             href="#contact"
             className="bg-[#e9c349] text-[#111415] text-xs font-semibold px-5 py-2.5 rounded hover:bg-[#d8b238] transition-colors inline-block"
           >
-            Consult Our Team
+            {t("nav.consult")}
           </a>
         </div>
 
-        {/* Mobile Hamburger Toggle */}
-        <button
-          onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-          className="md:hidden text-[#e9c349] focus:outline-none p-1"
-        >
-          <span className="material-symbols-outlined text-3xl">
-            {isMobileMenuOpen ? "close" : "menu"}
-          </span>
-        </button>
+        {/* Mobile: bahasa + hamburger */}
+        <div className="md:hidden flex items-center gap-2">
+          <LanguageSwitcher />
+          <button
+            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            aria-label={t("nav.menu")}
+            aria-expanded={isMobileMenuOpen}
+            className="text-[#e9c349] focus:outline-none p-1"
+          >
+            <span className="material-symbols-outlined text-3xl">
+              {isMobileMenuOpen ? "close" : "menu"}
+            </span>
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu Drawer */}
@@ -102,7 +111,7 @@ export default function Navbar() {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`py-1.5 transition-colors ${mobileActiveClass}`}
                 >
-                  {link.name}
+                  {label(link)}
                 </Link>
               ) : (
                 <a
@@ -111,7 +120,7 @@ export default function Navbar() {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`py-1.5 transition-colors ${mobileActiveClass}`}
                 >
-                  {link.name}
+                  {label(link)}
                 </a>
               );
             })}
@@ -121,7 +130,7 @@ export default function Navbar() {
             onClick={() => setIsMobileMenuOpen(false)}
             className="bg-[#e9c349] text-[#111415] text-xs font-semibold px-5 py-3 rounded text-center mt-2"
           >
-            Consult Our Team
+            {t("nav.consult")}
           </a>
         </div>
       )}

@@ -1,26 +1,17 @@
 import { useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { showcaseCategories, showcaseProjects } from "../data/showcaseData";
-import { WA_LINK, socials } from "../data/contact";
-
-const services = [
-  {
-    title: "Event Organizer & Production",
-    text: "Festivals, gala dinners and corporate summits, run end to end by one crew.",
-  },
-  {
-    title: "Integrated Marketing Campaigns",
-    text: "One story told across every channel, with results you can measure.",
-  },
-  {
-    title: "Commercial & Content Production",
-    text: "Film and video made for cinema, broadcast and digital screens.",
-  },
-];
+import { getWaLink, getSocials } from "../data/contact";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function ShowcasePage() {
   const [activeCategory, setActiveCategory] = useState("All Works");
   const reduce = useReducedMotion();
+  const { t, lang } = useLanguage();
+  const services = t("showcase.services");
+  const categoryLabel = (c) => t(`showcase.categories.${c}`, c);
+  // Judul/deskripsi/badge proyek: terjemahan dicari per id, cadangannya teks dari data
+  const field = (p, k) => t(`showcase.projects.${p.id}.${k}`, p[k]);
 
   const filteredProjects =
     activeCategory === "All Works"
@@ -40,7 +31,7 @@ export default function ShowcasePage() {
       <section className="relative min-h-[70vh] md:min-h-[85vh] flex items-end overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1600&auto=format&fit=crop"
-          alt="Crowd at a night concert"
+          alt={t("showcase.heroAlt")}
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#111415] via-[#111415]/60 to-[#111415]/20"></div>
@@ -49,19 +40,19 @@ export default function ShowcasePage() {
           <h1 className="font-serif font-bold text-[#f3f1ea] leading-[0.95] tracking-tight text-[3.25rem] sm:text-7xl md:text-[9rem]">
             <span className="block overflow-hidden pb-2">
               <motion.span className="block" {...line(0)}>
-                The Masterpiece
+                {t("showcase.titleLine1")}
               </motion.span>
             </span>
             <span className="block overflow-hidden pb-2">
               <motion.span className="block italic font-normal text-[#e9c349]" {...line(1)}>
-                Gallery
+                {t("showcase.titleLine2")}
               </motion.span>
             </span>
           </h1>
 
           <div className="mt-8 md:mt-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-t border-white/20 pt-5">
             <p className="font-serif italic text-lg md:text-xl text-[#d0d2d8] max-w-md leading-snug">
-              Where vision meets precision, and moments become legacies.
+              {t("showcase.quote")}
             </p>
             <div className="md:text-right">
               <p className="font-serif italic text-xl md:text-2xl text-[#e9c349]">Rising the Stars</p>
@@ -86,7 +77,7 @@ export default function ShowcasePage() {
                   active ? "text-[#e9c349]" : "text-[#9a9da5] hover:text-white"
                 }`}
               >
-                {category}
+                {categoryLabel(category)}
                 {active && (
                   <motion.span
                     layoutId="tab-underline"
@@ -117,21 +108,21 @@ export default function ShowcasePage() {
                     className={`${project.height} w-full bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-[1.03]`}
                     style={{ backgroundImage: `url('${project.image}')` }}
                     role="img"
-                    aria-label={project.title}
+                    aria-label={field(project, "title")}
                   ></div>
                 </div>
 
                 <div className="mt-4 flex items-start justify-between gap-6">
                   <div>
                     <h3 className="font-serif text-xl md:text-2xl text-white leading-snug">
-                      {project.title}
+                      {field(project, "title")}
                     </h3>
                     <p className="mt-1.5 text-sm text-[#a9acb4] leading-relaxed max-w-lg line-clamp-2">
-                      {project.description}
+                      {field(project, "description")}
                     </p>
                   </div>
                   <span className="shrink-0 text-xs text-[#e9c349] border border-[#e9c349]/40 rounded-sm px-2 py-1 mt-1">
-                    {project.badge}
+                    {field(project, "badge")}
                   </span>
                 </div>
               </motion.article>
@@ -146,7 +137,7 @@ export default function ShowcasePage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 border-t border-white/10 pt-16 md:pt-24">
             <div className="lg:col-span-7">
               <h2 className="font-serif text-4xl md:text-6xl text-[#f3f1ea] leading-tight max-w-xl">
-                Three Disciplines, One Team.
+                {t("showcase.servicesHeading")}
               </h2>
 
               <ul className="mt-12 divide-y divide-white/10 border-y border-white/10">
@@ -164,11 +155,11 @@ export default function ShowcasePage() {
             <figure className="lg:col-span-5">
               <img
                 src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800&auto=format&fit=crop"
-                alt="Production crew at work"
+                alt={t("showcase.crewAlt")}
                 className="w-full aspect-[4/5] object-cover rounded-sm"
               />
               <figcaption className="mt-3 text-sm text-[#a9acb4]">
-                150+ events delivered.
+                {t("showcase.crewCaption")}
               </figcaption>
             </figure>
           </div>
@@ -180,25 +171,24 @@ export default function ShowcasePage() {
         <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-20 md:py-28 flex flex-col md:flex-row md:items-end md:justify-between gap-10">
           <div className="max-w-2xl">
             <h2 className="font-serif italic text-4xl md:text-6xl text-white leading-tight">
-              Ready to Make History?
+              {t("showcase.ctaTitle")}
             </h2>
             <p className="mt-5 text-[#a9acb4] max-w-md">
-              Tell us about the event or campaign you have in mind. Allstars Enterprise will reply
-              with a first plan.
+              {t("showcase.ctaText")}
             </p>
           </div>
 
           <div className="flex flex-col items-start md:items-end gap-5">
             <a
-              href={WA_LINK}
+              href={getWaLink(lang)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-[#e9c349] text-[#111415] font-semibold px-8 py-4 rounded-sm hover:bg-[#f1d170] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e9c349]"
             >
-              Contact Us
+              {t("common.contactUs")}
             </a>
             <ul className="flex gap-6 text-sm text-[#a9acb4]">
-              {socials.map((item) => (
+              {getSocials(lang).map((item) => (
                 <li key={item.label}>
                   <a
                     href={item.href}
