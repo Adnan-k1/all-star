@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { showcaseCategories, showcaseProjects } from "../data/showcaseData";
 import { getWaLink, getSocials } from "../data/contact";
 import { useLanguage } from "../context/LanguageContext";
@@ -98,11 +98,7 @@ export default function ShowcasePage() {
               >
                 {categoryLabel(category)}
                 {active && (
-                  <motion.span
-                    layoutId="tab-underline"
-                    transition={{ duration: reduce ? 0 : 0.3 }}
-                    className="absolute left-0 right-0 -bottom-px h-[2px] bg-[#e9c349]"
-                  />
+                  <span className="absolute left-0 right-0 -bottom-px h-[2px] bg-[#e9c349]" />
                 )}
               </button>
             );
@@ -110,18 +106,16 @@ export default function ShowcasePage() {
         </div>
 
         {/* Grid: gambar di atas, keterangan di bawah seperti katalog pameran */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-12">
-          <AnimatePresence>
-            {filteredProjects.map((project) => (
-              <motion.article
-                layout
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.35 }}
-                key={project.id}
-                className={`${project.gridClass} group`}
-              >
+        {/* Ganti filter = grid memudar masuk (fade), tanpa gerakan menggeser */}
+        <motion.div
+          key={activeCategory}
+          initial={reduce ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-12"
+        >
+          {filteredProjects.map((project) => (
+            <article key={project.id} className={`${project.gridClass} group`}>
                 <div className="overflow-hidden rounded-sm bg-[#161a1b]">
                   <div
                     className={`${project.height} w-full bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-[1.03]`}
@@ -144,9 +138,8 @@ export default function ShowcasePage() {
                     {field(project, "badge")}
                   </span>
                 </div>
-              </motion.article>
-            ))}
-          </AnimatePresence>
+            </article>
+          ))}
         </motion.div>
       </section>
 
@@ -227,4 +220,4 @@ export default function ShowcasePage() {
       </section>
     </div>
   );
-}
+} 
