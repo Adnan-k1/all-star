@@ -23,7 +23,7 @@ export default function Structure() {
 
   return (
     <section id="leadership" className="py-24 px-4 sm:px-6 md:px-12 bg-[#0a0c0d] text-[#e1e3e4] relative overflow-hidden font-sans select-none">
-      {/* Grid Pattern Background untuk Mengisi Ruang Kosong */}
+      {/* Grid Pattern Background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none"></div>
 
       {/* Background Ambient Glow */}
@@ -65,7 +65,7 @@ export default function Structure() {
         {/* Structure Tree */}
         <div className="flex flex-col items-center relative">
           
-          {/* ================= TOP LEVEL: CEO CARD (Gaya Wide / Padat) ================= */}
+          {/* ================= TOP LEVEL: CEO CARD ================= */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -83,7 +83,6 @@ export default function Structure() {
                 background: "radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(233, 195, 73, 0.12), transparent 40%)",
               }}
             >
-              {/* Top Accent Line */}
               <div className="absolute top-0 left-0 w-0 h-[3px] bg-gradient-to-r from-[#e9c349] via-[#fcebad] to-[#e9c349] group-hover:w-full transition-all duration-500 ease-out z-30"></div>
 
               {/* CEO Image Ring */}
@@ -94,12 +93,13 @@ export default function Structure() {
                   loading="lazy"
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
                 />
-                <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-[#0a0c0d]/80 border border-[#e9c349]/40 text-[#e9c349] text-[9px] font-bold tracking-widest uppercase backdrop-blur-md">
-                  #01 {t("structure.ceoBadge")}
+                {/* Badge CEO Kiri Atas: "01 CEO" (Tanpa #) */}
+                <div className="absolute top-2 left-2 z-10 px-2 py-0.5 rounded bg-[#0a0c0d]/80 border border-[#e9c349]/40 text-[#e9c349] text-[9px] font-bold tracking-widest uppercase backdrop-blur-md">
+                  01 {mText(ceo, "role")}
                 </div>
               </div>
 
-              {/* CEO Content Info */}
+              {/* CEO Info */}
               <div className="text-center sm:text-left flex-1 space-y-2">
                 <span className="inline-block text-[#e9c349] text-[11px] font-bold uppercase tracking-[0.2em] bg-[#e9c349]/10 px-3 py-0.5 rounded-full border border-[#e9c349]/20">
                   {mText(ceo, "role")}
@@ -174,24 +174,26 @@ export default function Structure() {
                 >
                   <div className="absolute top-0 left-0 w-0 h-[2px] bg-[#e9c349] group-hover:w-full transition-all duration-500 ease-out z-30"></div>
 
-                  {/* Director Avatar */}
-                  <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden shrink-0 border border-white/10 group-hover:border-[#e9c349]/50 transition-colors">
+                  {/* Director Avatar dengan Badge Kiri Atas yang Sama: "02 COO" (Tanpa #) */}
+                  <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-xl overflow-hidden shrink-0 border border-white/10 group-hover:border-[#e9c349]/50 transition-colors">
                     <img
                       src={director.image}
                       alt={director.name}
                       loading="lazy"
                       className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded bg-[#0a0c0d]/80 border border-white/10 text-[#e9c349] text-[9px] font-semibold">
-                      0{index + 2}
+                    {/* Badge Kiri Atas: "02 COO" */}
+                    <div className="absolute top-2 left-2 z-10 px-2 py-0.5 rounded bg-[#0a0c0d]/80 border border-[#e9c349]/40 text-[#e9c349] text-[9px] font-bold tracking-widest uppercase backdrop-blur-md">
+                      0{index + 2} {mText(director, "role")}
                     </div>
                   </div>
 
                   {/* Director Content */}
                   <div className="text-left flex-1 space-y-1">
-                    <p className="text-[#e9c349] text-[10px] font-bold uppercase tracking-[0.18em]">
+                    <span className="inline-block text-[#e9c349] text-[10px] font-bold uppercase tracking-[0.18em] bg-[#e9c349]/10 px-2.5 py-0.5 rounded-full border border-[#e9c349]/20">
                       {mText(director, "role")}
-                    </p>
+                    </span>
+
                     <h4 className="text-lg sm:text-xl font-serif text-white font-bold group-hover:text-[#e9c349] transition-colors">
                       {director.name}
                     </h4>
@@ -202,9 +204,10 @@ export default function Structure() {
                       </p>
                     )}
 
-                    <span className="inline-flex items-center gap-1 mt-2 text-[10px] text-[#e9c349] font-medium tracking-wider group-hover:translate-x-1 transition-transform">
-                      {clickCard} →
-                    </span>
+                    <div className="pt-1 flex items-center gap-1 text-[10px] text-[#e9c349] font-medium tracking-wider group-hover:translate-x-1 transition-transform">
+                      <span>{clickCard}</span>
+                      <span className="material-symbols-outlined text-xs">arrow_forward</span>
+                    </div>
                   </div>
                 </motion.div>
               </motion.div>
@@ -253,8 +256,7 @@ export default function Structure() {
 
                 <div className="text-center sm:text-left space-y-3 flex-1">
                   <span className="px-3 py-1 rounded-full bg-[#e9c349]/10 border border-[#e9c349]/40 text-[#e9c349] text-[10px] font-bold tracking-widest uppercase">
-                    #0{selectedMember.n}{" "}
-                    {t(selectedMember.tier === "ceo" ? "structure.tierCeo" : "structure.tierDirector")}
+                    0{selectedMember.n} {mText(selectedMember, "role")}
                   </span>
                   <div>
                     <h3 className="text-2xl sm:text-3xl font-serif text-white font-bold">
