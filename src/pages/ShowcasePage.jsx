@@ -1,23 +1,104 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { showcaseCategories, showcaseProjects } from "../data/showcaseData";
+import { showcaseCategories, showcasePhotos } from "../data/showcaseData";
 import { getWaLink, getSocials } from "../data/contact";
 import { useLanguage } from "../context/LanguageContext";
 
+const PAGE_SIZE = 12;
+
+function Lightbox({ photos, index, onChange, onClose, label, t }) {
+  const photo = photos[index];
+  const total = photos.length;
+  const prev = useCallback(() => onChange((index - 1 + total) % total), [index, total, onChange]);
+  const next = useCallback(() => onChange((index + 1) % total), [index, total, onChange]);
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    };
+    window.addEventListener("keydown", onKey);
+    const old = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = old;
+    };
+  }, [onClose, prev, next]);
+
+  const btn =
+    "absolute z-10 w-11 h-11 rounded-full bg-white/10 hover:bg-[#e9c349] hover:text-[#111415] text-white flex items-center justify-center transition-colors cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#e9c349]";
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={label}
+      onClick={onClose}
+      className="fixed inset-0 z-[70] bg-black/90 flex items-center justify-center p-4 md:p-10"
+    >
+      <button onClick={onClose} aria-label={t("showcase.close")} className={`${btn} top-4 right-4`}>
+        <span className="material-symbols-outlined">close</span>
+      </button>
+      {total > 1 && (
+        <>
+          <button
+            onClick={(e) => { e.stopPropagation(); prev(); }}
+            aria-label={t("showcase.prev")}
+            className={`${btn} left-3 md:left-6 top-1/2 -translate-y-1/2`}
+          >
+            <span className="material-symbols-outlined">chevron_left</span>
+          </button>
+          <button
+            onClick={(e) => { e.stopPropagation(); next(); }}
+            aria-label={t("showcase.next")}
+            className={`${btn} right-3 md:right-6 top-1/2 -translate-y-1/2`}
+          >
+            <span className="material-symbols-outlined">chevron_right</span>
+          </button>
+        </>
+      )}
+      <figure onClick={(e) => e.stopPropagation()} className="flex flex-col items-center max-w-6xl w-full">
+        <img src={photo.src} alt={label} className="max-h-[80vh] max-w-full w-auto object-contain rounded-sm" />
+        <figcaption className="mt-4 flex items-center gap-4 text-sm text-[#c4c6cf]">
+          <span>{label}</span>
+          <span className="text-[#a9acb4]">{index + 1} / {total}</span>
+        </figcaption>
+      </figure>
+    </div>
+  );
+}
+
 export default function ShowcasePage() {
   const [activeCategory, setActiveCategory] = useState("All Works");
+  const [visible, setVisible] = useState(PAGE_SIZE);
+  const [lightbox, setLightbox] = useState(null);
+  const [ratios, setRatios] = useState({}); // rasio asli foto (lebar / tinggi) setelah dimuat
   const reduce = useReducedMotion();
   const { t, lang } = useLanguage();
   const services = t("showcase.services");
   const stats = t("showcase.stats");
   const categoryLabel = (c) => t(`showcase.categories.${c}`, c);
-  // Judul/deskripsi/badge proyek: terjemahan dicari per id, cadangannya teks dari data
-  const field = (p, k) => t(`showcase.projects.${p.id}.${k}`, p[k]);
+  const countFor = (c) =>
+    c === "All Works" ? showcasePhotos.length : showcasePhotos.filter((p) => p.category === c).length;
+  const saveRatio = (id, img) => {
+    if (!img.naturalWidth || !img.naturalHeight) return;
+    const r = img.naturalWidth / img.naturalHeight;
+    setRatios((prev) => (prev[id] === r ? prev : { ...prev, [id]: r }));
+  };
+  const selectCategory = (c) => {
+    setActiveCategory(c);
+    setVisible(PAGE_SIZE);
+    setLightbox(null);
+  };
 
-  const filteredProjects =
+  const filteredPhotos =
     activeCategory === "All Works"
-      ? showcaseProjects
-      : showcaseProjects.filter((item) => item.category === activeCategory);
+      ? showcasePhotos
+      : showcasePhotos.filter((p) => p.category === activeCategory);
+  const shownPhotos = filteredPhotos.slice(0, visible);
+  const photoLabel = (p) => p.caption || categoryLabel(p.category);
 
   // Satu-satunya momen animasi otomatis: judul hero muncul per baris
   const line = (i) => ({
@@ -42,13 +123,17 @@ export default function ShowcasePage() {
         </span>
 
         <div className="relative w-full max-w-[1440px] mx-auto px-6 md:px-16 pb-14 md:pb-20">
-          <h1 className="font-serif font-bold text-[#f3f1ea] leading-[0.95] tracking-tight text-[3.25rem] sm:text-7xl md:text-[9rem]">
-            <span className="block overflow-hidden pb-2">
+          <p className="mb-4 text-sm text-[#e9c349]">{t("showcase.label")}</p>
+          <h1
+            className="font-serif font-bold text-[#f3f1ea] leading-[1.02] tracking-tight"
+            style={{ fontSize: "clamp(3rem, 9vw, 8.5rem)" }}
+          >
+            <span className="block overflow-hidden pb-[0.18em]">
               <motion.span className="block" {...line(0)}>
                 {t("showcase.titleLine1")}
               </motion.span>
             </span>
-            <span className="block overflow-hidden pb-2">
+            <span className="block overflow-hidden pb-[0.18em]">
               <motion.span className="block italic font-normal text-[#e9c349]" {...line(1)}>
                 {t("showcase.titleLine2")}
               </motion.span>
@@ -90,13 +175,14 @@ export default function ShowcasePage() {
             return (
               <button
                 key={category}
-                onClick={() => setActiveCategory(category)}
+                onClick={() => selectCategory(category)}
                 aria-pressed={active}
                 className={`relative pb-4 text-sm md:text-base transition-colors cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e9c349] ${
                   active ? "text-[#e9c349]" : "text-[#9a9da5] hover:text-white"
                 }`}
               >
                 {categoryLabel(category)}
+                <span className="ml-1.5 text-xs opacity-60">{countFor(category)}</span>
                 {active && (
                   <span className="absolute left-0 right-0 -bottom-px h-[2px] bg-[#e9c349]" />
                 )}
@@ -105,42 +191,72 @@ export default function ShowcasePage() {
           })}
         </div>
 
-        {/* Grid: gambar di atas, keterangan di bawah seperti katalog pameran */}
-        {/* Ganti filter = grid memudar masuk (fade), tanpa gerakan menggeser */}
-        <motion.div
-          key={activeCategory}
-          initial={reduce ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-12"
-        >
-          {filteredProjects.map((project) => (
-            <article key={project.id} className={`${project.gridClass} group`}>
-                <div className="overflow-hidden rounded-sm bg-[#161a1b]">
-                  <div
-                    className={`${project.height} w-full bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-[1.03]`}
-                    style={{ backgroundImage: `url('${project.image}')` }}
-                    role="img"
-                    aria-label={field(project, "title")}
-                  ></div>
-                </div>
-
-                <div className="mt-4 flex items-start justify-between gap-6">
-                  <div>
-                    <h3 className="font-serif text-xl md:text-2xl text-white leading-snug">
-                      {field(project, "title")}
-                    </h3>
-                    <p className="mt-1.5 text-sm text-[#a9acb4] leading-relaxed max-w-lg line-clamp-2">
-                      {field(project, "description")}
-                    </p>
+        {/* Galeri: kotak seragam, klik untuk melihat foto besar. Ganti filter = fade, tanpa menggeser */}
+        {filteredPhotos.length === 0 ? (
+          <p className="text-[#a9acb4]">{t("showcase.empty")}</p>
+        ) : (
+          <>
+            <motion.div
+              key={activeCategory}
+              initial={reduce ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="columns-2 md:columns-3 lg:columns-4 gap-3 md:gap-4"
+            >
+              {shownPhotos.map((photo, i) => (
+                <button
+                  key={photo.id}
+                  type="button"
+                  onClick={() => setLightbox(i)}
+                  aria-label={photoLabel(photo)}
+                  className="group relative mb-3 md:mb-4 block w-full break-inside-avoid overflow-hidden rounded-md bg-[#161a1b] ring-1 ring-white/10 hover:ring-[#e9c349]/50 transition-shadow duration-300 cursor-zoom-in text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e9c349]"
+                >
+                  {/* Kotak mengikuti rasio asli foto, jadi tidak ada bagian yang terpotong */}
+                  <div style={{ aspectRatio: ratios[photo.id] || 4 / 5 }}>
+                    <img
+                      ref={(el) => {
+                        if (el && el.complete) saveRatio(photo.id, el);
+                      }}
+                      src={photo.src}
+                      alt={photoLabel(photo)}
+                      loading="lazy"
+                      decoding="async"
+                      onLoad={(e) => saveRatio(photo.id, e.currentTarget)}
+                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    />
                   </div>
-                  <span className="shrink-0 text-xs text-[#e9c349] border border-[#e9c349]/40 rounded-sm px-2 py-1 mt-1">
-                    {field(project, "badge")}
-                  </span>
-                </div>
-            </article>
-          ))}
-        </motion.div>
+
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 px-3 pb-3 pt-14 md:px-4 md:pb-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300">
+                    <p className="text-xs tracking-[0.1em] text-[#e9c349]">{categoryLabel(photo.category)}</p>
+                    {photo.caption && <p className="mt-0.5 text-sm text-white">{photo.caption}</p>}
+                  </div>
+                </button>
+              ))}
+            </motion.div>
+
+            {visible < filteredPhotos.length && (
+              <div className="mt-12 text-center">
+                <button
+                  onClick={() => setVisible((v) => v + PAGE_SIZE)}
+                  className="border border-[#e9c349]/60 text-[#e9c349] font-semibold px-8 py-3 rounded-sm hover:bg-[#e9c349]/10 transition-colors cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e9c349]"
+                >
+                  {t("showcase.loadMore")} ({filteredPhotos.length - visible})
+                </button>
+              </div>
+            )}
+          </>
+        )}
+
+        {lightbox !== null && filteredPhotos[lightbox] && (
+          <Lightbox
+            photos={filteredPhotos}
+            index={lightbox}
+            onChange={setLightbox}
+            onClose={() => setLightbox(null)}
+            label={photoLabel(filteredPhotos[lightbox])}
+            t={t}
+          />
+        )}
       </section>
 
       {/* ================= EXPERTISE (hanya "All Works") ================= */}
@@ -220,4 +336,4 @@ export default function ShowcasePage() {
       </section>
     </div>
   );
-} 
+}

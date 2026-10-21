@@ -8,10 +8,8 @@ export default function Structure() {
   const { t } = useLanguage();
   const [selectedMember, setSelectedMember] = useState(null);
 
-  // Jabatan & deskripsi: terjemahan per id (ceo / 1..4), cadangannya teks dari data
-  const mText = (m, k) => t(`team.${m.id}.${k}`, m[k]);
+  const mText = (m, k) => t(`team.${m.id}.${k}`, m[k] ?? "");
 
-  // Efek Spotlight Kursor pada Kartu
   const handleMouseMove = (e) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
@@ -24,20 +22,23 @@ export default function Structure() {
   const clickCard = t("structure.clickCard");
 
   return (
-    <section id="leadership" className="py-28 px-4 sm:px-6 md:px-16 bg-[#111415] text-[#e1e3e4] relative overflow-hidden font-sans select-none">
-      {/* Background Ambient Glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-r from-[#e9c349]/10 via-[#e9c349]/5 to-transparent blur-[160px] rounded-full pointer-events-none"></div>
+    <section id="leadership" className="py-24 px-4 sm:px-6 md:px-12 bg-[#0a0c0d] text-[#e1e3e4] relative overflow-hidden font-sans select-none">
+      {/* Grid Pattern Background untuk Mengisi Ruang Kosong */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none"></div>
 
-      <div className="max-w-[1280px] mx-auto relative z-10">
+      {/* Background Ambient Glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-r from-[#e9c349]/15 via-[#e9c349]/5 to-transparent blur-[140px] rounded-full pointer-events-none"></div>
+
+      <div className="max-w-[1200px] mx-auto relative z-10">
         {/* Header Section */}
-        <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 border border-[#e9c349]/40 rounded-full text-[#e9c349] text-[11px] font-bold tracking-[0.25em] uppercase bg-[#161a1b]/80 shadow-[0_0_15px_rgba(233,195,73,0.15)] backdrop-blur-md"
+            className="inline-flex items-center gap-2 px-4 py-1.5 border border-[#e9c349]/40 rounded-full text-[#e9c349] text-[11px] font-bold tracking-[0.25em] uppercase bg-[#121516]/90 shadow-[0_0_20px_rgba(233,195,73,0.15)] backdrop-blur-md"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e9c349] animate-ping"></span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#e9c349] animate-pulse"></span>
             {t("structure.badge")}
           </motion.div>
 
@@ -54,81 +55,105 @@ export default function Structure() {
             </span>
           </motion.h2>
 
-          <div className="w-20 h-[3px] bg-gradient-to-r from-transparent via-[#e9c349] to-transparent mx-auto rounded-full my-3 shadow-[0_0_12px_rgba(233,195,73,0.6)]"></div>
+          <div className="w-24 h-[2px] bg-gradient-to-r from-transparent via-[#e9c349] to-transparent mx-auto my-3 shadow-[0_0_12px_rgba(233,195,73,0.6)]"></div>
 
-          <p className="text-sm md:text-base text-[#c4c6cf] font-light leading-relaxed max-w-xl mx-auto">
+          <p className="text-sm md:text-base text-[#a0a5ad] font-normal leading-relaxed max-w-xl mx-auto">
             {t("structure.hint")}
           </p>
         </div>
 
         {/* Structure Tree */}
         <div className="flex flex-col items-center relative">
-          {/* ================= TOP LEVEL: CEO CARD ================= */}
+          
+          {/* ================= TOP LEVEL: CEO CARD (Gaya Wide / Padat) ================= */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative z-20 mb-12 lg:mb-20 w-full max-w-md lg:max-w-none lg:w-auto"
+            className="relative z-20 mb-12 w-full max-w-2xl"
           >
             <motion.div
-              whileHover={{ scale: 1.03, y: -6 }}
-              whileTap={{ scale: 0.95, rotateY: 10 }}
+              whileHover={{ scale: 1.01, y: -4 }}
+              whileTap={{ scale: 0.98 }}
               onMouseMove={handleMouseMove}
               onClick={() => setSelectedMember({ ...ceo, tier: "ceo", n: 1 })}
-              className="group relative w-full lg:w-80 bg-[#161a1b]/90 rounded-2xl border border-[#e9c349]/40 overflow-hidden transition-all duration-300 hover:border-[#e9c349] hover:shadow-[0_0_35px_rgba(233,195,73,0.3)] p-5 lg:p-0 lg:aspect-[3/4] flex lg:block items-center gap-5 cursor-pointer backdrop-blur-xl"
+              className="group relative w-full bg-[#131718]/90 rounded-2xl border border-[#e9c349]/40 overflow-hidden transition-all duration-300 hover:border-[#e9c349] hover:shadow-[0_0_35px_rgba(233,195,73,0.2)] p-5 sm:p-6 flex flex-col sm:flex-row items-center gap-6 cursor-pointer backdrop-blur-xl"
               style={{
-                background: "radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(233, 195, 73, 0.15), transparent 40%)",
+                background: "radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(233, 195, 73, 0.12), transparent 40%)",
               }}
             >
-              <div className="absolute top-3 right-3 z-30 px-2.5 py-1 rounded-md bg-[#111415]/80 border border-[#e9c349]/40 text-[#e9c349] text-[9px] font-bold tracking-widest uppercase backdrop-blur-md">
-                #01 {t("structure.ceoBadge")}
-              </div>
+              {/* Top Accent Line */}
+              <div className="absolute top-0 left-0 w-0 h-[3px] bg-gradient-to-r from-[#e9c349] via-[#fcebad] to-[#e9c349] group-hover:w-full transition-all duration-500 ease-out z-30"></div>
 
-              <div className="absolute top-0 left-0 w-0 h-[3px] bg-gradient-to-r from-[#e9c349] to-white group-hover:w-full transition-all duration-500 ease-out z-30"></div>
-
-              <div className="relative w-28 h-28 sm:w-32 sm:h-32 lg:w-full lg:h-full rounded-xl lg:rounded-none overflow-hidden shrink-0 border border-white/10 lg:border-none">
+              {/* CEO Image Ring */}
+              <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-xl overflow-hidden shrink-0 border-2 border-[#e9c349]/50 shadow-lg group-hover:border-[#e9c349] transition-colors">
                 <img
                   src={ceo.image}
                   alt={ceo.name}
                   loading="lazy"
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
                 />
+                <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-[#0a0c0d]/80 border border-[#e9c349]/40 text-[#e9c349] text-[9px] font-bold tracking-widest uppercase backdrop-blur-md">
+                  #01 {t("structure.ceoBadge")}
+                </div>
               </div>
 
-              <div className="hidden lg:block absolute inset-0 bg-gradient-to-t from-[#111415] via-[#111415]/20 to-transparent opacity-90 group-hover:opacity-40 transition-opacity"></div>
-
-              <div className="lg:absolute lg:bottom-0 lg:left-0 lg:right-0 lg:p-6 text-left lg:text-center z-20 flex-1">
-                <p className="text-[#e9c349] text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] mb-1">{mText(ceo, "role")}</p>
-                <h3 className="text-xl lg:text-2xl font-serif text-white font-bold group-hover:text-[#e9c349] transition-colors">{ceo.name}</h3>
-                <span className="inline-block mt-2 text-[10px] text-[#e9c349]/80 uppercase font-semibold tracking-wider">
-                  {clickCard}
+              {/* CEO Content Info */}
+              <div className="text-center sm:text-left flex-1 space-y-2">
+                <span className="inline-block text-[#e9c349] text-[11px] font-bold uppercase tracking-[0.2em] bg-[#e9c349]/10 px-3 py-0.5 rounded-full border border-[#e9c349]/20">
+                  {mText(ceo, "role")}
                 </span>
+                
+                <h3 className="text-2xl sm:text-3xl font-serif text-white font-bold group-hover:text-[#e9c349] transition-colors">
+                  {ceo.name}
+                </h3>
+
+                {mText(ceo, "description") && (
+                  <p className="text-xs text-[#a0a5ad] line-clamp-2 leading-relaxed">
+                    {mText(ceo, "description")}
+                  </p>
+                )}
+
+                <div className="pt-2 flex items-center justify-center sm:justify-start gap-2 text-[11px] text-[#e9c349] font-medium tracking-wider group-hover:translate-x-1 transition-transform">
+                  <span>{clickCard}</span>
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </div>
               </div>
             </motion.div>
 
-            {/* Connecting Flow Line (Desktop) */}
+            {/* Connecting Flow Line */}
             <div className="absolute left-1/2 top-full w-[2px] h-12 -translate-x-1/2 hidden lg:block overflow-hidden bg-white/10">
-              <div className="w-full h-full bg-gradient-to-b from-[#e9c349] to-transparent animate-pulse"></div>
+              <div className="w-full h-full bg-gradient-to-b from-[#e9c349] to-transparent shadow-[0_0_10px_#e9c349]"></div>
             </div>
           </motion.div>
 
-          {/* ================= CIRCUIT CONNECTING LINES (DESKTOP) ================= */}
-          <div className="relative w-full mb-16 hidden lg:block">
-            <div className="absolute top-0 left-[12.5%] right-[12.5%] h-[2px] bg-white/10 overflow-hidden">
-              <div className="w-full h-full bg-gradient-to-r from-transparent via-[#e9c349] to-transparent shadow-[0_0_10px_#e9c349]"></div>
+          {/* ================= CIRCUIT CONNECTING LINES ================= */}
+          {directors.length > 1 ? (
+            <div className="relative w-full max-w-4xl mb-12 hidden lg:block">
+              <div className="absolute top-0 left-[15%] right-[15%] h-[2px] bg-white/10 overflow-hidden">
+                <div className="w-full h-full bg-gradient-to-r from-transparent via-[#e9c349] to-transparent shadow-[0_0_10px_#e9c349]"></div>
+              </div>
+              <div className="flex justify-between px-[15%]">
+                {directors.map((_, i) => (
+                  <div key={i} className="w-[2px] h-8 bg-white/10 relative overflow-hidden">
+                    <div className="w-full h-full bg-gradient-to-b from-[#e9c349] to-transparent"></div>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="flex justify-between px-[12.5%]">
-              {[0, 1, 2, 3].map((i) => (
-                <div key={i} className="w-[2px] h-8 bg-white/10 relative overflow-hidden">
-                  <div className="w-full h-full bg-gradient-to-b from-[#e9c349] to-transparent animate-bounce"></div>
-                </div>
-              ))}
-            </div>
-          </div>
+          ) : (
+            <div className="hidden lg:block w-[2px] h-8 -mt-8 bg-white/10"></div>
+          )}
 
           {/* ================= BOTTOM ROW: DIRECTORS CARDS ================= */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-md md:max-w-none relative z-20">
+          <div
+            className={
+              directors.length === 1
+                ? "flex justify-center w-full relative z-20"
+                : "grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl relative z-20"
+            }
+          >
             {directors.map((director, index) => (
               <motion.div
                 key={director.id || index}
@@ -138,47 +163,58 @@ export default function Structure() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <motion.div
-                  whileHover={{ scale: 1.04, y: -6 }}
-                  whileTap={{ scale: 0.95, rotateY: -10 }}
+                  whileHover={{ scale: 1.02, y: -4 }}
+                  whileTap={{ scale: 0.98 }}
                   onMouseMove={handleMouseMove}
                   onClick={() => setSelectedMember({ ...director, tier: "director", n: index + 2 })}
-                  className="group relative bg-[#161a1b]/80 rounded-2xl border border-white/10 overflow-hidden transition-all duration-300 hover:border-[#e9c349]/70 hover:shadow-[0_0_25px_rgba(233,195,73,0.2)] p-4 lg:p-0 lg:aspect-[3/4] flex lg:block items-center gap-4 cursor-pointer backdrop-blur-xl"
+                  className="group relative bg-[#131718]/80 rounded-2xl border border-white/10 overflow-hidden transition-all duration-300 hover:border-[#e9c349]/70 hover:shadow-[0_0_25px_rgba(233,195,73,0.15)] p-4 sm:p-5 flex items-center gap-4 cursor-pointer backdrop-blur-xl"
                   style={{
-                    background: "radial-gradient(400px circle at var(--x, 50%) var(--y, 50%), rgba(233, 195, 73, 0.12), transparent 40%)",
+                    background: "radial-gradient(400px circle at var(--x, 50%) var(--y, 50%), rgba(233, 195, 73, 0.10), transparent 40%)",
                   }}
                 >
-                  <div className="absolute top-3 right-3 z-30 px-2 py-0.5 rounded bg-[#111415]/80 border border-white/10 text-[#e9c349] text-[9px] font-semibold tracking-wider">
-                    0{index + 2}
-                  </div>
-
                   <div className="absolute top-0 left-0 w-0 h-[2px] bg-[#e9c349] group-hover:w-full transition-all duration-500 ease-out z-30"></div>
 
-                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 lg:w-full lg:h-full rounded-xl lg:rounded-none overflow-hidden shrink-0 border border-white/10 lg:border-none">
+                  {/* Director Avatar */}
+                  <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden shrink-0 border border-white/10 group-hover:border-[#e9c349]/50 transition-colors">
                     <img
                       src={director.image}
                       alt={director.name}
                       loading="lazy"
                       className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
                     />
+                    <div className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded bg-[#0a0c0d]/80 border border-white/10 text-[#e9c349] text-[9px] font-semibold">
+                      0{index + 2}
+                    </div>
                   </div>
 
-                  <div className="hidden lg:block absolute inset-0 bg-gradient-to-t from-[#111415] via-[#111415]/20 to-transparent opacity-90 group-hover:opacity-40 transition-opacity"></div>
+                  {/* Director Content */}
+                  <div className="text-left flex-1 space-y-1">
+                    <p className="text-[#e9c349] text-[10px] font-bold uppercase tracking-[0.18em]">
+                      {mText(director, "role")}
+                    </p>
+                    <h4 className="text-lg sm:text-xl font-serif text-white font-bold group-hover:text-[#e9c349] transition-colors">
+                      {director.name}
+                    </h4>
+                    
+                    {mText(director, "description") && (
+                      <p className="text-[11px] text-[#a0a5ad] line-clamp-2 leading-normal">
+                        {mText(director, "description")}
+                      </p>
+                    )}
 
-                  <div className="lg:absolute lg:bottom-0 lg:left-0 lg:right-0 lg:p-5 text-left lg:text-center z-20 flex-1">
-                    <p className="text-[#e9c349] text-[10px] font-bold uppercase tracking-[0.2em] mb-1">{mText(director, "role")}</p>
-                    <h4 className="text-lg lg:text-xl font-serif text-white font-bold group-hover:text-[#e9c349] transition-colors">{director.name}</h4>
-                    <span className="inline-block mt-1 text-[9px] text-[#e9c349]/80 uppercase font-semibold tracking-wider">
-                      {clickCard}
+                    <span className="inline-flex items-center gap-1 mt-2 text-[10px] text-[#e9c349] font-medium tracking-wider group-hover:translate-x-1 transition-transform">
+                      {clickCard} →
                     </span>
                   </div>
                 </motion.div>
               </motion.div>
             ))}
           </div>
+
         </div>
       </div>
 
-      {/* ================= MODAL DETAIL (MUNCUL SAAT KARTU DIKLIK) ================= */}
+      {/* ================= MODAL DETAIL ================= */}
       <AnimatePresence>
         {selectedMember && (
           <motion.div
@@ -189,25 +225,25 @@ export default function Structure() {
             className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md"
           >
             <motion.div
-              initial={{ scale: 0.7, opacity: 0, rotateY: 90 }}
-              animate={{ scale: 1, opacity: 1, rotateY: 0 }}
-              exit={{ scale: 0.7, opacity: 0, rotateY: -90 }}
-              transition={{ type: "spring", stiffness: 260, damping: 20 }}
+              initial={{ scale: 0.95, opacity: 0, y: 10 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 10 }}
+              transition={{ duration: 0.2 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-xl bg-gradient-to-b from-[#1a1f21] to-[#111415] border-2 border-[#e9c349]/50 rounded-3xl p-6 sm:p-8 overflow-hidden shadow-[0_0_60px_rgba(233,195,73,0.25)]"
+              className="relative w-full max-w-xl bg-gradient-to-b from-[#181c1e] to-[#0d0f10] border-2 border-[#e9c349]/50 rounded-3xl p-6 sm:p-8 overflow-hidden shadow-[0_0_60px_rgba(233,195,73,0.2)]"
             >
               <div className="absolute top-0 right-0 w-40 h-40 bg-[#e9c349]/10 blur-3xl pointer-events-none"></div>
 
               <button
                 onClick={() => setSelectedMember(null)}
                 aria-label={t("structure.close")}
-                className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-[#e9c349] hover:text-[#111415] transition-colors cursor-pointer z-30"
+                className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-[#e9c349] hover:text-[#0b0d0e] transition-colors cursor-pointer z-30"
               >
                 <span className="material-symbols-outlined text-xl">close</span>
               </button>
 
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 relative z-10">
-                <div className="w-32 h-32 sm:w-44 sm:h-44 rounded-2xl overflow-hidden border-2 border-[#e9c349] shrink-0 shadow-2xl">
+                <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl overflow-hidden border-2 border-[#e9c349] shrink-0 shadow-2xl">
                   <img
                     src={selectedMember.image}
                     alt={selectedMember.name}
@@ -229,18 +265,11 @@ export default function Structure() {
                     </p>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-[#c4c6cf] font-light leading-relaxed border-t border-white/10 pt-3">
-                    {mText(selectedMember, "description") || t("structure.modalDefault")}
-                  </p>
-
-                  <div className="pt-2 flex flex-wrap justify-center sm:justify-start gap-2">
-                    <span className="text-[10px] px-2.5 py-1 rounded-full bg-white/5 text-[#c4c6cf] border border-white/10">
-                      {t("structure.chip1")}
-                    </span>
-                    <span className="text-[10px] px-2.5 py-1 rounded-full bg-white/5 text-[#c4c6cf] border border-white/10">
-                      {t("structure.chip2")}
-                    </span>
-                  </div>
+                  {mText(selectedMember, "description") && (
+                    <p className="text-xs sm:text-sm text-[#c4c6cf] font-normal leading-relaxed border-t border-white/10 pt-3">
+                      {mText(selectedMember, "description")}
+                    </p>
+                  )}
                 </div>
               </div>
             </motion.div>

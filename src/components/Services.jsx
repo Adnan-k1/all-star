@@ -90,7 +90,7 @@ export default function Services() {
 
   return (
     <section
-      id="who-we-are"
+      id="services"
       className="py-24 px-4 md:px-12 bg-[#111415] text-[#e1e3e4] relative overflow-hidden"
     >
       <div className="max-w-[1440px] mx-auto">
@@ -101,7 +101,7 @@ export default function Services() {
             <span className="text-[#e9c349] italic">{t("services.headlineAccent")}</span>{" "}
             {t("services.headlineEnd")}
           </h2>
-          <p className="text-sm md:text-base text-[#c4c6cf] font-light">{t("services.sub")}</p>
+          <p className="text-sm md:text-base text-[#c4c6cf] font-normal">{t("services.sub")}</p>
         </div>
 
         {/* Carousel */}
@@ -183,7 +183,7 @@ export default function Services() {
 
                       <div className="space-y-3">
                         <h3 className="text-xl font-semibold text-[#e1e3e4]">{sText(service, "title")}</h3>
-                        <p className="text-sm text-[#c4c6cf] leading-relaxed font-light line-clamp-5">
+                        <p className="text-sm text-[#c4c6cf] leading-relaxed font-normal line-clamp-5">
                           {sText(service, "description")}
                         </p>
                       </div>
@@ -240,7 +240,7 @@ export default function Services() {
 
         {/* Banner */}
         <div className="mt-14 p-6 md:p-8 rounded-2xl bg-[#161a1b]/80 border border-[#e9c349]/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <p className="text-sm md:text-base text-[#c4c6cf] max-w-3xl leading-relaxed font-light">
+          <p className="text-sm md:text-base text-[#c4c6cf] max-w-3xl leading-relaxed font-normal">
             {t("services.banner")}
           </p>
           <a

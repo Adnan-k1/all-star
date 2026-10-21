@@ -1,7 +1,4 @@
-import Renandaimg from "../assets/images/Renanda.png";
 import Nandaimg from "../assets/images/Nanda.png";
-import Boshaimg from "../assets/images/boscha.png";
-import arryimg from "../assets/images/arry.png";
 import idingimg from "../assets/images/iding.png";
 
 // "key" dipakai untuk mengambil terjemahan nama menu (nav.links.<key>)
@@ -11,7 +8,7 @@ export const navLinks = [
   { key: "whyUs", name: "Why Us", href: "#why-us" },
   { key: "strength", name: "Our Strength", href: "#our-strength" },
   { key: "promises", name: "Our Promises", href: "#our-promises" },
-  { key: "leadership", name: "Leadership", href: "#leadership" },
+  { key: "leadership", name: "Core Teams", href: "#leadership" },
   { key: "showcase", name: "The Showcase", href: "/showcase" },
 ];
 
@@ -36,43 +33,24 @@ export const processSteps = [
   { id: 6, title: "6. Manage", description: "Faktor sukses event adalah manajemen yang menyatukan strategi, koordinasi dan eksekusi.", icon: "monitoring" },
 ];
 
-// ceo.id = "ceo" dan director.id = 1..4 dipakai untuk terjemahan (team.<id>.role / .description)
+// ceo.id = "ceo" dan director.id dipakai untuk terjemahan (team.<id>.role / .description).
+// Saat ini tim inti hanya 2 orang: 01 CEO dan 02 COO. Tambah orang baru cukup menambah
+// objek di array directors; tata letak di Structure.jsx menyesuaikan sendiri.
+// Deskripsi dikosongkan sampai klien memberi bio; modal hanya menampilkan bio bila ada.
 export const teamData = {
   ceo: {
     id: "ceo",
     name: "Nanda Persada",
-    role: "President Director / CEO",
+    role: "CEO",
     tagline: "VISIONARY LEADER",
     description: "Leading Allstars Enterprise with over 20 years of experience in the entertainment and event industry, shaping the future of luxury experiences.",
     image: Nandaimg,
   },
   directors: [
     {
-      id: 1,
-      name: "Arry Satria",
-      role: "Operational Director / COO",
-      description: "Master of logistics and execution, ensuring every event runs with surgical precision and flawless timing.",
-      image: arryimg,
-    },
-    {
-      id: 2,
-      name: "Renanda Bachtar",
-      role: "Business Director",
-      description: "Driving growth and strategic partnerships that elevate your brand and expand your global footprint.",
-      image: Renandaimg,
-    },
-    {
-      id: 3,
-      name: "Bosha Cahya Prasetya",
-      role: "Managing Director",
-      description: "Overseeing daily operations and team synergy to maintain the highest standards of creative excellence.",
-      image: Boshaimg,
-    },
-    {
       id: 4,
-      name: "Iding",
-      role: "Director of Gov/Public Sector",
-      description: "Specializing in high-profile public sector events and government relations with unmatched diplomacy.",
+      name: "Iding Achmad Haidir, Ph.D.",
+      role: "COO",
       image: idingimg,
     },
   ],

@@ -1,62 +1,42 @@
-// Teks Inggris di sini jadi cadangan. Terjemahan Indonesia ada di translations.js (showcase.projects.<id>)
-export const showcaseCategories = [
-  "All Works",
-  "Event Production",
-  "Integrated Marketing",
-  "Content Production",
-  "Digital Activation",
-  "Social & KOL",
-];
 
-export const showcaseProjects = [
-  {
-    id: 1,
-    title: "Royal Gala Symphony",
-    category: "Event Production",
-    badge: "EVENT PRODUCTION",
-    description: "An immersive orchestral experience at the Royal Opera, blending classical music with state-of-the-art holographic production.",
-    image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200&auto=format&fit=crop",
-    gridClass: "md:col-span-8",
-    height: "h-[400px] md:h-[500px]",
-  },
-  {
-    id: 2,
-    title: "Luxury Brand Storytelling",
-    category: "Content Production",
-    badge: "CONTENT PRODUCTION",
-    description: "Cinematic storytelling for high-end luxury brands.",
-    image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800&auto=format&fit=crop",
-    gridClass: "md:col-span-4",
-    height: "h-[400px] md:h-[500px]",
-  },
-  {
-    id: 3,
-    title: "Immersive Digital Dome",
-    category: "Digital Activation",
-    badge: "DIGITAL",
-    description: "Redefining guest interaction through immersive digital architecture.",
-    image: "https://images.unsplash.com/photo-1508997449629-303059a039c0?q=80&w=800&auto=format&fit=crop",
-    gridClass: "md:col-span-4",
-    height: "h-[350px]",
-  },
-  {
-    id: 4,
-    title: "Global Tastemakers Summit",
-    category: "Social & KOL",
-    badge: "KOL MANAGEMENT",
-    description: "Strategic partnerships with industry titans and global tastemakers.",
-    image: "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=800&auto=format&fit=crop",
-    gridClass: "md:col-span-4",
-    height: "h-[350px]",
-  },
-  {
-    id: 5,
-    title: "Integrated Brand Launch",
-    category: "Integrated Marketing",
-    badge: "INTEGRATED",
-    description: "Multi-channel marketing strategy creating massive engagement across platforms.",
-    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop",
-    gridClass: "md:col-span-4",
-    height: "h-[350px]",
-  },
-];
+const FOLDERS = {
+  "event-production": "Event Production",
+  "integrated-marketing": "Integrated Marketing",
+  "content-production": "Content Production",
+  "digital-activation": "Digital Activation",
+  "social-kol": "Social & KOL",
+};
+
+export const showcaseCategories = ["All Works", ...Object.values(FOLDERS)];
+
+const modules = import.meta.glob(
+  "../assets/showcase/*/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP}",
+  { eager: true }
+);
+
+function captionFrom(fileName) {
+  const name = fileName
+    .replace(/\.[^.]+$/, "")
+    .replace(/^\d+[-_ ]*/, "")
+    .replace(/[-_]+/g, " ")
+    .trim();
+  if (!name || /^\d+$/.test(name) || /^(img|dsc|dscf|photo|image|foto|screenshot|whatsapp)/i.test(name)) {
+    return "";
+  }
+  return name.replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+export const showcasePhotos = Object.entries(modules)
+  .map(([path, mod]) => {
+    const parts = path.split("/");
+    const file = parts[parts.length - 1];
+    const folder = parts[parts.length - 2];
+    return {
+      id: path,
+      src: mod.default,
+      category: FOLDERS[folder],
+      caption: captionFrom(file),
+    };
+  })
+  .filter((p) => p.category) 
+  .sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));

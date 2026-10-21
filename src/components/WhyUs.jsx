@@ -20,7 +20,7 @@ export default function WhyUs() {
         {String(i + 1).padStart(2, "0")}
       </span>
       <h3 className="text-xl font-serif font-semibold text-white mb-4 leading-snug">{item.title}</h3>
-      <p className="text-xs sm:text-sm text-[#a1a3a8] font-light leading-relaxed">{item.description}</p>
+      <p className="text-sm text-[#a1a3a8] font-normal leading-relaxed">{item.description}</p>
     </motion.div>
   );
 
@@ -41,7 +41,7 @@ export default function WhyUs() {
 
           <div className="w-16 h-[3px] bg-[#e9c349] mx-auto rounded-full mt-2 mb-4 shadow-[0_0_10px_rgba(233,195,73,0.5)]"></div>
 
-          <p className="text-sm md:text-base text-[#c4c6cf] font-light leading-relaxed">{t("why.sub")}</p>
+          <p className="text-sm md:text-base text-[#c4c6cf] font-normal leading-relaxed">{t("why.sub")}</p>
         </div>
 
         {/* 5 Cards: 3 di atas, 2 di bawah */}

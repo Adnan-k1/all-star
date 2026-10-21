@@ -1,6 +1,4 @@
-// Semua teks situs. Dibaca dengan t("hero.line1"), t("why.items"), dst.
-// Data yang sudah punya teks Inggris di companyData/showcaseData (layanan, tim, proyek)
-// cukup diterjemahkan di blok "id"; versi Inggrisnya diambil dari data aslinya.
+
 export const translations = {
   en: {
     common: { contactUs: "Contact Us" },
@@ -12,7 +10,7 @@ export const translations = {
         whyUs: "Why Us",
         strength: "Our Strength",
         promises: "Our Promises",
-        leadership: "Leadership",
+        leadership: "Core Teams",
         showcase: "The Showcase",
       },
       consult: "Consult Our Team",
@@ -37,24 +35,20 @@ export const translations = {
       next: "Next service",
       slideOf: "{i} of {n}",
       viewService: "View service {title}",
-      cta: "Get started",
-      banner: "We align big ideas with cross-platform execution that connects your audience's emotions to your business goals.",
-      bannerCta: "Talk to us about your event",
+      cta: "Register Now",
+      banner: "We align big ideas with cross-platform execution that connects audience emotions with your business goals.",
+      bannerCta: "Consult Your Event",
     },
 
     structure: {
       badge: "EXECUTIVE LEADERSHIP",
       titleA: "LEADERSHIP &",
       titleB: "STRUCTURE",
-      hint: "Click a leadership card to see their profile and professional track record.",
+      hint: "Click on the leadership cards to view their profiles and professional track records.",
       clickCard: "Click Card →",
       ceoBadge: "CEO",
       tierCeo: "EXECUTIVE",
-      tierDirector: "DIRECTOR",
-      modalDefault:
-        "A high-level professional track record in strategic management and the execution of large-scale projects.",
-      chip1: "★ Industry Veteran",
-      chip2: "★ Key Decision Maker",
+      tierDirector: "CORE TEAM",
       close: "Close",
     },
 
@@ -67,12 +61,12 @@ export const translations = {
         {
           title: "Proven Track Record",
           description:
-            "Led and managed by professionals with decades of hands-on experience across marketing, entertainment, talent, media, and events — expertise that shortens the distance between strategy and results.",
+            "Led and managed by professionals with decades of hands-on experience across marketing, entertainment, talent, media, and events—expertise that shortens the distance between strategy and results.",
         },
         {
           title: "Integrated Service Offering",
           description:
-            "Digital marketing, talent management, professional event organization, and entertainment services delivered under one agency — aligned by a very sharp strategy and informed by a single set of insights.",
+            "Digital marketing, talent management, professional event organization, and entertainment services delivered under one agency—aligned by a very sharp strategy and informed by a single set of insights.",
         },
         {
           title: "Established Industry Network",
@@ -82,7 +76,7 @@ export const translations = {
         {
           title: "Insight-Driven Strategy",
           description:
-            "We research before we create. Every campaign, talent placement, and event is shaped by deeper insight into audience behavior, market data, and cultural context — so every decision is made on evidence, not assumption.",
+            "We research before we create. Every campaign, talent placement, and event is shaped by deeper insight into audience behavior, market data, and cultural context—so every decision is made on evidence, not assumption.",
         },
         {
           title: "Execution Excellence",
@@ -99,7 +93,7 @@ export const translations = {
       sub: "Four fundamental pillars that define every engagement, campaign, and production at Allstars Enterprise.",
       pillar: "PILLAR",
       items: [
-        { title: "Insight is The Brain", description: "Deep understanding of market, audience, and culture precedes every creation." },
+        { title: "Insight is The Brain", description: "Deep understanding of the market, audience, and culture precedes every creation." },
         { title: "Strategy is The Weapon", description: "Sharp, evidence-based communication calibrated to outmaneuver the competition." },
         { title: "Execution is The Way", description: "Uncompromising discipline, agility, and attention to detail from plan to live stage." },
         { title: "Results is The Commitment", description: "Tangible, measurable impact that drives lasting value and elevated brand stature." },
@@ -112,11 +106,11 @@ export const translations = {
       titleB: "STRENGTH",
       quote: "Experience Meets Insight.",
       lead: "Allstars Enterprise stands at the intersection of experience, insight, and execution.",
-      p1: "Our team brings decades of proven expertise across marketing, entertainment, talent, media, and event industries. Combined with our research-driven approach, we go deeper into every client, brand, and product before developing a strategy.",
+      p1: "Our team brings decades of proven expertise across the marketing, entertainment, talent, media, and event industries. Combined with our research-driven approach, we go deeper into every client, brand, and product before developing a strategy.",
       pillars: [
-        { title: "We Understand First", subtitle: "Never creating based on assumptions" },
-        { title: "We Strategize With Purpose", subtitle: "Sharp, evidence-based direction" },
-        { title: "We Execute With Precision", subtitle: "Discipline, agility, and accountability" },
+        { title: "We Understand First", subtitle: "Never creating based on assumptions." },
+        { title: "We Strategize With Purpose", subtitle: "Sharp, evidence-based direction." },
+        { title: "We Execute With Precision", subtitle: "Discipline, agility, and accountability." },
       ],
       p2: "With decades of experience now brought together under one agency, Allstars Enterprise delivers the strategic depth, industry access, creative perspective, and executional discipline that clients need to create meaningful impact.",
       callout:
@@ -139,9 +133,11 @@ export const translations = {
       privacy: "Privacy Policy",
       terms: "Terms of Service",
       contact: "Contact",
+      press: "Press Kit",
     },
 
     showcase: {
+      label: "Portfolio Showcase",
       heroAlt: "Crowd at a night concert",
       titleLine1: "The Masterpiece",
       titleLine2: "Gallery",
@@ -182,7 +178,7 @@ export const translations = {
         whyUs: "Mengapa Kami",
         strength: "Kekuatan Kami",
         promises: "Janji Kami",
-        leadership: "Kepemimpinan",
+        leadership: "Tim Inti",
         showcase: "Showcase",
       },
       consult: "Konsultasi dengan Tim Kami",
@@ -207,9 +203,9 @@ export const translations = {
       next: "Layanan berikutnya",
       slideOf: "{i} dari {n}",
       viewService: "Lihat layanan {title}",
-      cta: "Daftar sekarang",
+      cta: "Daftar Sekarang",
       banner: "Kami menyelaraskan ide besar dengan eksekusi lintas platform yang menghubungkan emosi audiens dengan tujuan bisnis Anda.",
-      bannerCta: "Konsultasikan event Anda",
+      bannerCta: "Konsultasikan Event Anda",
       items: {
         1: { title: "Kampanye Pemasaran Terpadu", description: "Kampanye strategis yang mendorong engagement dan pertumbuhan." },
         2: { title: "Event Organizer & Produksi", description: "Manajemen dan produksi event dari awal hingga akhir dengan kualitas terbaik." },
@@ -228,39 +224,15 @@ export const translations = {
       clickCard: "Klik Kartu →",
       ceoBadge: "CEO",
       tierCeo: "EKSEKUTIF",
-      tierDirector: "DIREKTUR",
-      modalDefault:
-        "Memiliki rekam jejak profesional berskala tinggi dalam manajemen strategis dan eksekusi proyek-proyek besar.",
-      chip1: "★ Veteran Industri",
-      chip2: "★ Pengambil Keputusan Utama",
+      tierDirector: "TIM INTI",
       close: "Tutup",
     },
 
     team: {
       ceo: {
-        role: "Presiden Direktur / CEO",
+        role: "CEO",
         description:
           "Memimpin Allstars Enterprise dengan pengalaman lebih dari 20 tahun di industri hiburan dan event, membentuk masa depan pengalaman mewah.",
-      },
-      1: {
-        role: "Direktur Operasional / COO",
-        description:
-          "Ahli logistik dan eksekusi, memastikan setiap event berjalan dengan presisi tinggi dan waktu yang sempurna.",
-      },
-      2: {
-        role: "Direktur Bisnis",
-        description:
-          "Mendorong pertumbuhan dan kemitraan strategis yang mengangkat brand Anda dan memperluas jangkauan global Anda.",
-      },
-      3: {
-        role: "Direktur Pelaksana",
-        description:
-          "Mengawasi operasional harian dan sinergi tim untuk menjaga standar keunggulan kreatif tertinggi.",
-      },
-      4: {
-        role: "Direktur Pemerintahan / Sektor Publik",
-        description:
-          "Spesialis event sektor publik dan hubungan pemerintah berprofil tinggi dengan diplomasi yang tak tertandingi.",
       },
     },
 
@@ -320,9 +292,9 @@ export const translations = {
       lead: "Allstars Enterprise berdiri di persimpangan antara pengalaman, wawasan, dan eksekusi.",
       p1: "Tim kami membawa keahlian puluhan tahun yang terbukti di industri pemasaran, hiburan, talenta, media, dan event. Dipadukan dengan pendekatan berbasis riset, kami menggali lebih dalam setiap klien, brand, dan produk sebelum menyusun strategi.",
       pillars: [
-        { title: "Kami Memahami Lebih Dulu", subtitle: "Tidak pernah berkarya berdasarkan asumsi" },
-        { title: "Kami Berstrategi dengan Tujuan", subtitle: "Arah yang tajam dan berbasis bukti" },
-        { title: "Kami Mengeksekusi dengan Presisi", subtitle: "Disiplin, kelincahan, dan akuntabilitas" },
+        { title: "Kami Memahami Lebih Dulu", subtitle: "Tidak pernah berkarya berdasarkan asumsi." },
+        { title: "Kami Berstrategi dengan Tujuan", subtitle: "Arah yang tajam dan berbasis bukti." },
+        { title: "Kami Mengeksekusi dengan Presisi", subtitle: "Disiplin, kelincahan, dan akuntabilitas." },
       ],
       p2: "Dengan pengalaman puluhan tahun yang kini disatukan dalam satu agensi, Allstars Enterprise menghadirkan kedalaman strategi, akses industri, perspektif kreatif, dan disiplin eksekusi yang dibutuhkan klien untuk menciptakan dampak yang berarti.",
       callout:
@@ -345,9 +317,11 @@ export const translations = {
       privacy: "Kebijakan Privasi",
       terms: "Syarat Layanan",
       contact: "Kontak",
+      press: "Press Kit",
     },
 
     showcase: {
+      label: "Portofolio Showcase",
       heroAlt: "Penonton di sebuah konser malam hari",
       titleLine1: "Galeri",
       titleLine2: "Mahakarya",

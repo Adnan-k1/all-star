@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 
-// Ikon tetap, teks diambil dari terjemahan (urutannya sama)
 const ICONS = ["psychology", "shield", "rocket_launch", "verified"];
 
 export default function OurPromises() {
@@ -42,7 +41,7 @@ export default function OurPromises() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-sm md:text-base text-[#c4c6cf] font-light leading-relaxed max-w-2xl mx-auto"
+            className="text-sm md:text-base text-[#c4c6cf] font-normal leading-relaxed max-w-2xl mx-auto"
           >
             {t("promises.sub")}
           </motion.p>
@@ -73,7 +72,7 @@ export default function OurPromises() {
 
               <div className="w-8 h-[1px] bg-white/10 mb-4 group-hover:w-12 group-hover:bg-[#e9c349]/40 transition-all duration-300"></div>
 
-              <p className="text-xs sm:text-sm text-[#a1a3a8] font-light leading-relaxed">{item.description}</p>
+              <p className="text-sm text-[#a1a3a8] font-normal leading-relaxed">{item.description}</p>
             </motion.div>
           ))}
         </div>

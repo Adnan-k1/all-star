@@ -3,7 +3,6 @@ import logo from "/src/assets/images/logo.png";
 import { useLanguage } from "../context/LanguageContext";
 import { getWaLink, getSocials } from "../data/contact";
 
-// Kalau diisi null, akan tampil placeholder "LOGO"
 const LOGO_SRC = logo;
 
 const ease = [0.16, 1, 0.3, 1];
@@ -18,7 +17,7 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex flex-col pt-28 px-6 md:px-16 overflow-hidden bg-[#111415]"
     >
-      {/* Background */}
+  
       <div className="absolute inset-0 z-0">
         <img
           src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1920&q=80"
@@ -29,9 +28,9 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#111415]/60 via-transparent to-[#111415]" />
       </div>
 
-      {/* Konten utama */}
+ 
       <div className="relative z-10 w-full max-w-[1440px] mx-auto flex-1 grid md:grid-cols-12 items-center gap-12 py-10">
-        {/* Teks */}
+ 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -49,11 +48,11 @@ export default function Hero() {
             <span className="italic text-[#e9c349]">{t("hero.line2")}</span>
           </h1>
 
-          <p className="text-base md:text-lg text-[#c4c6cf] max-w-xl leading-relaxed font-light">
+          <p className="text-base md:text-lg text-[#c4c6cf] max-w-xl leading-relaxed font-normal">
             {t("hero.text")}
           </p>
 
-          {/* Satu tombol utama + tautan sosial */}
+        
           <div className="pt-2 flex flex-col items-start gap-5">
             <a
               href={getWaLink(lang)}
@@ -80,7 +79,6 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Panggung logo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.88 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -105,15 +103,13 @@ export default function Hero() {
                 className="relative w-[58%] h-[58%] object-contain drop-shadow-[0_8px_30px_rgba(233,195,73,0.35)]"
               />
             ) : (
-              <span className="relative font-serif italic text-3xl text-[#e9c349]/70">
-                LOGO
-              </span>
+              <span className="relative font-serif italic text-3xl text-[#e9c349]/70">LOGO</span>
             )}
           </div>
         </motion.div>
       </div>
 
-      {/* Layanan (Tulisan bawah dibuat center) */}
+      {/* Layanan */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -121,10 +117,7 @@ export default function Hero() {
         className="relative z-10 w-full max-w-[1440px] mx-auto border-t border-[#e9c349]/25 py-6 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4"
       >
         {services.map((s) => (
-          <div
-            key={s}
-            className="flex items-center justify-center gap-3 text-sm text-[#c4c6cf] text-center"
-          >
+          <div key={s} className="flex items-center gap-3 text-sm text-[#c4c6cf]">
             <span className="w-1.5 h-1.5 rounded-full bg-[#e9c349] shrink-0" />
             {s}
           </div>

@@ -50,7 +50,7 @@ export default function OurStrength() {
           className="max-w-3xl mx-auto space-y-4 mb-14"
         >
           <h3 className="text-base sm:text-lg md:text-xl font-bold text-white leading-snug">{t("strength.lead")}</h3>
-          <p className="text-xs sm:text-sm md:text-base text-[#a1a3a8] font-light leading-relaxed">{t("strength.p1")}</p>
+          <p className="text-sm md:text-base text-[#a1a3a8] font-normal leading-relaxed">{t("strength.p1")}</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
@@ -66,7 +66,7 @@ export default function OurStrength() {
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-[#e9c349] group-hover:w-full transition-all duration-500 ease-out"></div>
 
               <h4 className="text-base sm:text-lg font-serif font-semibold text-[#e9c349] mb-2 leading-snug">{pillar.title}</h4>
-              <p className="text-xs sm:text-sm text-[#a1a3a8] font-light">{pillar.subtitle}</p>
+              <p className="text-sm text-[#a1a3a8] font-normal">{pillar.subtitle}</p>
             </motion.div>
           ))}
         </div>
@@ -78,9 +78,9 @@ export default function OurStrength() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="max-w-3xl mx-auto space-y-8"
         >
-          <p className="text-xs sm:text-sm md:text-base text-[#a1a3a8] font-light leading-relaxed">{t("strength.p2")}</p>
+          <p className="text-sm md:text-base text-[#a1a3a8] font-normal leading-relaxed">{t("strength.p2")}</p>
 
-          <p className="text-xs sm:text-sm font-semibold text-[#e9c349] tracking-wider uppercase leading-relaxed max-w-2xl mx-auto">
+          <p className="text-sm font-semibold text-[#e9c349] tracking-wider uppercase leading-relaxed max-w-2xl mx-auto">
             {t("strength.callout")}
           </p>
         </motion.div>
