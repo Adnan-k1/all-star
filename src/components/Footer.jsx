@@ -1,5 +1,5 @@
 import { useLanguage } from "../context/LanguageContext";
-import { getSocials } from "../data/contact";
+import SocialLinks from "./SocialLinks";
 
 export default function Footer() {
   const { t, lang } = useLanguage();
@@ -19,23 +19,11 @@ export default function Footer() {
           <a href="#privacy" className={linkClass}>{t("footer.privacy")}</a>
           <a href="#terms" className={linkClass}>{t("footer.terms")}</a>
           <a href="#contact" className={linkClass}>{t("footer.contact")}</a>
+          <a href="#press" className={linkClass}>{t("footer.press")}</a>
         </nav>
 
         {/* Sosial media: WhatsApp, Instagram, LinkedIn */}
-        <ul className="flex flex-wrap justify-center gap-6 text-sm text-[#c4c6cf]">
-          {getSocials(lang).map((item) => (
-            <li key={item.label}>
-              <a
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#e9c349] hover:underline underline-offset-4 transition-colors"
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <SocialLinks lang={lang} className="justify-center gap-2" buttonClass="w-9 h-9" iconClass="w-4 h-4" />
       </div>
     </footer>
   );

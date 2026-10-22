@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { showcaseCategories, showcasePhotos } from "../data/showcaseData";
-import { getWaLink, getSocials } from "../data/contact";
+import { getWaLink } from "../data/contact";
 import { useLanguage } from "../context/LanguageContext";
 
 const PAGE_SIZE = 12;
@@ -36,8 +36,14 @@ function Lightbox({ photos, index, onChange, onClose, label, t }) {
       aria-modal="true"
       aria-label={label}
       onClick={onClose}
-      className="fixed inset-0 z-[70] bg-black/90 flex items-center justify-center p-4 md:p-10"
+      className="fixed inset-0 z-[70] bg-black/90 flex items-center justify-center p-4 md:p-10 overflow-hidden"
     >
+      {/* Latar berpendar dari foto itu sendiri, supaya foto kecil tidak terlihat "kosong" */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-30 blur-3xl scale-110"
+        style={{ backgroundImage: `url("${photo.src}")` }}
+      />
       <button onClick={onClose} aria-label={t("showcase.close")} className={`${btn} top-4 right-4`}>
         <span className="material-symbols-outlined">close</span>
       </button>
@@ -59,8 +65,10 @@ function Lightbox({ photos, index, onChange, onClose, label, t }) {
           </button>
         </>
       )}
-      <figure onClick={(e) => e.stopPropagation()} className="flex flex-col items-center max-w-6xl w-full">
-        <img src={photo.src} alt={label} className="max-h-[80vh] max-w-full w-auto object-contain rounded-sm" />
+      <figure onClick={(e) => e.stopPropagation()} className="relative flex flex-col items-center max-w-6xl w-full">
+        <div className="photo-grain relative inline-block overflow-hidden rounded-sm ring-1 ring-[#e9c349]/30 shadow-[0_20px_80px_rgba(0,0,0,0.6)]">
+          <img src={photo.src} alt={label} className="block max-h-[80vh] max-w-full w-auto h-auto object-contain" />
+        </div>
         <figcaption className="mt-4 flex items-center gap-4 text-sm text-[#c4c6cf]">
           <span>{label}</span>
           <span className="text-[#a9acb4]">{index + 1} / {total}</span>
@@ -109,6 +117,13 @@ export default function ShowcasePage() {
 
   return (
     <div className="bg-[#111415] text-[#e1e3e4] min-h-screen pt-20 font-sans">
+      <style>{`
+        .photo-grain::after {
+          content: ""; position: absolute; inset: 0; pointer-events: none;
+          opacity: .12; mix-blend-mode: overlay;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+      `}</style>
       {/* ================= HERO ================= */}
       <section className="relative min-h-[70vh] md:min-h-[85vh] flex items-end overflow-hidden">
         <img
@@ -212,7 +227,7 @@ export default function ShowcasePage() {
                   className="group relative mb-3 md:mb-4 block w-full break-inside-avoid overflow-hidden rounded-md bg-[#161a1b] ring-1 ring-white/10 hover:ring-[#e9c349]/50 transition-shadow duration-300 cursor-zoom-in text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e9c349]"
                 >
                   {/* Kotak mengikuti rasio asli foto, jadi tidak ada bagian yang terpotong */}
-                  <div style={{ aspectRatio: ratios[photo.id] || 4 / 5 }}>
+                  <div className="photo-grain relative" style={{ aspectRatio: ratios[photo.id] || 4 / 5 }}>
                     <img
                       ref={(el) => {
                         if (el && el.complete) saveRatio(photo.id, el);
@@ -222,9 +237,15 @@ export default function ShowcasePage() {
                       loading="lazy"
                       decoding="async"
                       onLoad={(e) => saveRatio(photo.id, e.currentTarget)}
-                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                      className="h-full w-full object-cover contrast-[1.06] saturate-[1.1] brightness-[0.96] group-hover:brightness-100 transition duration-700 ease-out group-hover:scale-[1.03]"
                     />
+                    {/* Pemanis: vignette + rona emas tipis menyatukan warna foto yang beragam & menyamarkan buram */}
+                    <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(17,20,21,0.55)_100%)]" />
+                    <div aria-hidden className="pointer-events-none absolute inset-0 bg-[#e9c349]/10 mix-blend-soft-light" />
                   </div>
+
+                  {/* Bingkai emas tipis muncul saat hover */}
+                  <div aria-hidden className="pointer-events-none absolute inset-2 rounded-sm border border-[#e9c349]/0 group-hover:border-[#e9c349]/50 transition-colors duration-500" />
 
                   <div className="pointer-events-none absolute inset-x-0 bottom-0 px-3 pb-3 pt-14 md:px-4 md:pb-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300">
                     <p className="text-xs tracking-[0.1em] text-[#e9c349]">{categoryLabel(photo.category)}</p>
@@ -298,7 +319,7 @@ export default function ShowcasePage() {
 
       {/* ================= CTA ================= */}
       <section className="border-t border-white/10 bg-[#161a1b]">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-20 md:py-28 flex flex-col md:flex-row md:items-end md:justify-between gap-10">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-20 md:py-28 flex flex-col md:flex-row md:items-center md:justify-between gap-10">
           <div className="max-w-2xl">
             <h2 className="font-serif italic text-4xl md:text-6xl text-white leading-tight">
               {t("showcase.ctaTitle")}
@@ -308,8 +329,7 @@ export default function ShowcasePage() {
             </p>
           </div>
 
-          <div className="flex flex-col items-start md:items-end gap-5">
-            <a
+          <a
               href={getWaLink(lang)}
               target="_blank"
               rel="noopener noreferrer"
@@ -317,21 +337,6 @@ export default function ShowcasePage() {
             >
               {t("showcase.ctaButton")}
             </a>
-            <ul className="flex gap-6 text-sm text-[#a9acb4]">
-              {getSocials(lang).map((item) => (
-                <li key={item.label}>
-                  <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#e9c349] underline-offset-4 hover:underline transition-colors"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
       </section>
     </div>

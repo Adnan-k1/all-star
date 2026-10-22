@@ -1,8 +1,10 @@
 import { motion, useReducedMotion } from "framer-motion";
 import logo from "/src/assets/images/logo.png";
 import { useLanguage } from "../context/LanguageContext";
-import { getWaLink, getSocials } from "../data/contact";
+import { getWaLink } from "../data/contact";
+import SocialLinks from "./SocialLinks";
 
+// Kalau diisi null, akan tampil placeholder "LOGO"
 const LOGO_SRC = logo;
 
 const ease = [0.16, 1, 0.3, 1];
@@ -17,7 +19,7 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex flex-col pt-28 px-6 md:px-16 overflow-hidden bg-[#111415]"
     >
-  
+      {/* Background */}
       <div className="absolute inset-0 z-0">
         <img
           src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1920&q=80"
@@ -28,9 +30,9 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#111415]/60 via-transparent to-[#111415]" />
       </div>
 
- 
+      {/* Konten utama */}
       <div className="relative z-10 w-full max-w-[1440px] mx-auto flex-1 grid md:grid-cols-12 items-center gap-12 py-10">
- 
+        {/* Teks */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -52,7 +54,7 @@ export default function Hero() {
             {t("hero.text")}
           </p>
 
-        
+          {/* Satu tombol utama + tautan sosial */}
           <div className="pt-2 flex flex-col items-start gap-5">
             <a
               href={getWaLink(lang)}
@@ -62,23 +64,11 @@ export default function Hero() {
             >
               {t("common.contactUs")}
             </a>
-            <ul className="flex gap-6 text-sm text-[#c4c6cf]">
-              {getSocials(lang).map((item) => (
-                <li key={item.label}>
-                  <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#e9c349] hover:underline underline-offset-4 transition-colors"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <SocialLinks lang={lang} />
           </div>
         </motion.div>
 
+        {/* Panggung logo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.88 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -114,7 +104,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.7 }}
-        className="relative z-10 w-full max-w-[1440px] mx-auto border-t border-[#e9c349]/25 py-6 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4"
+        className="relative z-10 w-full max-w-[1440px] mx-auto border-t border-[#e9c349]/25 py-6 flex flex-wrap justify-center gap-x-8 md:gap-x-16 gap-y-4"
       >
         {services.map((s) => (
           <div key={s} className="flex items-center gap-3 text-sm text-[#c4c6cf]">
