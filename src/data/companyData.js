@@ -3,11 +3,11 @@ import idingimg from "../assets/images/iding.png";
 
 export const navLinks = [
   { key: "home", name: "Home", href: "#home" },
-  { key: "services", name: "Our Service", href: "#services" },
+  { key: "services", name: "Our Services", href: "#services" },
   { key: "whyUs", name: "Why Us", href: "#why-us" },
   { key: "strength", name: "Our Strength", href: "#our-strength" },
   { key: "promises", name: "Our Promises", href: "#our-promises" },
-  { key: "leadership", name: "Core Teams", href: "#leadership" },
+  { key: "leadership", name: "Core Team", href: "#leadership" },
   { key: "showcase", name: "The Showcase", href: "/showcase" },
 ];
 
