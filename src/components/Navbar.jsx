@@ -2,12 +2,13 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { navLinks } from "../data/companyData";
 import { useLanguage } from "../context/LanguageContext";
+import { getWaLink } from "../data/contact";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const isHomePage = location.pathname === "/";
 
   
@@ -69,7 +70,9 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-5">
           <LanguageSwitcher />
           <a
-            href="#contact"
+            href={getWaLink(lang)}
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-[#e9c349] text-[#111415] text-xs font-semibold px-5 py-2.5 rounded hover:bg-[#d8b238] transition-colors inline-block"
           >
             {t("nav.consult")}
@@ -126,7 +129,9 @@ export default function Navbar() {
             })}
           </nav>
           <a
-            href="#contact"
+            href={getWaLink(lang)}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => setIsMobileMenuOpen(false)}
             className="bg-[#e9c349] text-[#111415] text-xs font-semibold px-5 py-3 rounded text-center mt-2"
           >

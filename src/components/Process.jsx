@@ -5,19 +5,19 @@ export default function OurStrength() {
     {
       id: 1,
       title: "We Understand First",
-      subtitle: "Never creating based on assumptions",
+      subtitle: "Never creating based on assumptions.",
       delay: 0.1,
     },
     {
       id: 2,
       title: "We Strategize With Purpose",
-      subtitle: "Sharp, evidence-based direction",
+      subtitle: "Sharp, evidence-based direction.",
       delay: 0.2,
     },
     {
       id: 3,
       title: "We Execute With Precision",
-      subtitle: "Discipline, agility, and accountability",
+      subtitle: "Discipline, agility, and accountability.",
       delay: 0.3,
     },
   ];

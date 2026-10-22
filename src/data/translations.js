@@ -1,19 +1,19 @@
 
 export const translations = {
   en: {
-    common: { contactUs: "Contact Us" },
+    common: { contactUs: "Let's Discuss the Future" },
 
     nav: {
       links: {
         home: "Home",
-        services: "Our Service",
+        services: "Our Services",
         whyUs: "Why Us",
         strength: "Our Strength",
         promises: "Our Promises",
-        leadership: "Core Teams",
+        leadership: "Core Team",
         showcase: "The Showcase",
       },
-      consult: "Consult Our Team",
+      consult: "Share Your Campaign Brief",
       menu: "Menu",
     },
 
@@ -35,9 +35,9 @@ export const translations = {
       next: "Next service",
       slideOf: "{i} of {n}",
       viewService: "View service {title}",
-      cta: "Register Now",
+      cta: "Explore Service",
       banner: "We align big ideas with cross-platform execution that connects audience emotions with your business goals.",
-      bannerCta: "Consult Your Event",
+      bannerCta: "Brief Your Campaign",
     },
 
     structure: {
@@ -93,10 +93,10 @@ export const translations = {
       sub: "Four fundamental pillars that define every engagement, campaign, and production at Allstars Enterprise.",
       pillar: "PILLAR",
       items: [
-        { title: "Insight is The Brain", description: "Deep understanding of the market, audience, and culture precedes every creation." },
-        { title: "Strategy is The Weapon", description: "Sharp, evidence-based communication calibrated to outmaneuver the competition." },
-        { title: "Execution is The Way", description: "Uncompromising discipline, agility, and attention to detail from plan to live stage." },
-        { title: "Results is The Commitment", description: "Tangible, measurable impact that drives lasting value and elevated brand stature." },
+        { title: "Insight Is the Brain", description: "Deep understanding of the market, audience, and culture precedes every creation." },
+        { title: "Strategy Is the Weapon", description: "Sharp, evidence-based communication calibrated to outmaneuver the competition." },
+        { title: "Execution Is the Way", description: "Uncompromising discipline, agility, and attention to detail from plan to live stage." },
+        { title: "Results Are the Commitment", description: "Tangible, measurable impact that drives lasting value and elevated brand stature." },
       ],
     },
 
@@ -164,12 +164,12 @@ export const translations = {
       ctaTitle: "Ready to make history?",
       ctaText:
         "Join the elite portfolio of brands that have chosen Allstars Enterprise to define their legacy.",
-      ctaButton: "Request a Consultation",
+      ctaButton: "Let's Discuss the Future",
     },
   },
 
   id: {
-    common: { contactUs: "Hubungi Kami" },
+    common: { contactUs: "Mari Diskusikan Masa Depan" },
 
     nav: {
       links: {
@@ -181,7 +181,7 @@ export const translations = {
         leadership: "Tim Inti",
         showcase: "Showcase",
       },
-      consult: "Konsultasi dengan Tim Kami",
+      consult: "Kirim Brief Campaign Anda",
       menu: "Menu",
     },
 
@@ -203,9 +203,9 @@ export const translations = {
       next: "Layanan berikutnya",
       slideOf: "{i} dari {n}",
       viewService: "Lihat layanan {title}",
-      cta: "Daftar Sekarang",
+      cta: "Pelajari Layanan",
       banner: "Kami menyelaraskan ide besar dengan eksekusi lintas platform yang menghubungkan emosi audiens dengan tujuan bisnis Anda.",
-      bannerCta: "Konsultasikan Event Anda",
+      bannerCta: "Brief Campaign Anda",
       items: {
         1: { title: "Kampanye Pemasaran Terpadu", description: "Kampanye strategis yang mendorong engagement dan pertumbuhan." },
         2: { title: "Event Organizer & Produksi", description: "Manajemen dan produksi event dari awal hingga akhir dengan kualitas terbaik." },
@@ -355,7 +355,7 @@ export const translations = {
       ctaTitle: "Siap menciptakan sejarah?",
       ctaText:
         "Bergabunglah dengan portofolio brand elit yang telah memilih Allstars Enterprise untuk menentukan warisan mereka.",
-      ctaButton: "Minta Konsultasi",
+      ctaButton: "Mari Diskusikan Masa Depan",
       projects: {
         1: {
           title: "Royal Gala Symphony",

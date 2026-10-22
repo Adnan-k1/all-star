@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { servicesData } from "../data/companyData";
 import { useLanguage } from "../context/LanguageContext";
+import { getWaLink } from "../data/contact";
 
 const AUTOPLAY_MS = 4000;
 const RESUME_AFTER_TOUCH_MS = 3000;
@@ -11,7 +12,7 @@ const DRAG_THRESHOLD = 8;
 const fmt = (str, vars) => str.replace(/\{(\w+)\}/g, (_, k) => vars[k]);
 
 export default function Services() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const total = servicesData.length;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -190,7 +191,9 @@ export default function Services() {
                     </div>
 
                     <a
-                      href="#contact"
+                      href={getWaLink(lang)}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       tabIndex={isCenter ? 0 : -1}
                       className="inline-flex items-center gap-2 text-sm font-semibold text-[#e9c349] hover:underline pt-4 border-t border-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e9c349]"
                     >
@@ -240,18 +243,20 @@ export default function Services() {
 
         {/* Banner */}
         <div className="mt-14 p-6 md:p-8 rounded-2xl bg-[#161a1b]/80 border border-[#e9c349]/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <p className="text-sm md:text-base text-[#c4c6cf] max-w-3xl leading-relaxed font-normal">
-            {t("services.banner")}
-          </p>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#e9c349] text-[#111415] text-sm font-semibold hover:bg-[#f2d062] transition-colors shrink-0 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e9c349]"
-          >
-            {t("services.bannerCta")}
-            <span className="material-symbols-outlined text-base" aria-hidden="true">
-              arrow_forward
-            </span>
-          </a>
+        <p className="text-sm md:text-base text-[#c4c6cf] max-w-3xl leading-relaxed font-normal">
+          {t("services.banner")}
+        </p>
+        <a
+          href={getWaLink(lang)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#e9c349] text-[#111415] text-sm font-semibold hover:bg-[#f2d062] transition-colors shrink-0 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e9c349]"
+        >
+          {t("services.bannerCta")}
+          <span className="material-symbols-outlined text-base" aria-hidden="true">
+            arrow_forward
+          </span>
+        </a>
         </div>
       </div>
     </section>
