@@ -4,7 +4,7 @@ import { useLanguage } from "../context/LanguageContext";
 import { getWaLink } from "../data/contact";
 import SocialLinks from "./SocialLinks";
 
-// Kalau diisi null, akan tampil placeholder "LOGO"
+
 const LOGO_SRC = logo;
 
 const ease = [0.16, 1, 0.3, 1];

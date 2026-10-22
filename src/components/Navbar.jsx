@@ -10,7 +10,7 @@ export default function Navbar() {
   const { t } = useLanguage();
   const isHomePage = location.pathname === "/";
 
-  // Fungsi pengecekan status aktif
+  
   const checkIsActive = (href) => {
     if (href.startsWith("/")) {
       return location.pathname === href;

@@ -84,7 +84,7 @@ export function SocialIcon({ name, className = "w-5 h-5" }) {
   );
 }
 
-// Deretan tombol ikon sosial media. Daftarnya diatur di data/contact.js
+
 export default function SocialLinks({ lang, className = "", buttonClass = "w-10 h-10", iconClass = "w-[18px] h-[18px]" }) {
   return (
     <ul className={`flex flex-wrap gap-3 ${className}`}>

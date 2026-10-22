@@ -4,10 +4,10 @@ import { useLanguage } from "../context/LanguageContext";
 
 const AUTOPLAY_MS = 4000;
 const RESUME_AFTER_TOUCH_MS = 3000;
-const SWIPE_DISTANCE = 50; // px minimal untuk dianggap swipe
-const DRAG_THRESHOLD = 8; // px minimal untuk dianggap drag (bukan klik)
+const SWIPE_DISTANCE = 50; 
+const DRAG_THRESHOLD = 8; 
 
-// Mengisi {i}, {n}, {title} di dalam teks terjemahan
+
 const fmt = (str, vars) => str.replace(/\{(\w+)\}/g, (_, k) => vars[k]);
 
 export default function Services() {
@@ -16,10 +16,10 @@ export default function Services() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [paused, setPaused] = useState(false);
 
-  // Judul/deskripsi layanan: terjemahan per id, cadangannya teks dari data
+  
   const sText = (s, k) => t(`services.items.${s.id}.${k}`, s[k]);
 
-  // Gesture disimpan di ref agar tidak kena nilai state yang basi
+  
   const startX = useRef(0);
   const deltaX = useRef(0);
   const dragging = useRef(false);
@@ -33,7 +33,7 @@ export default function Services() {
   const prevSlide = () => goTo(currentIndex - 1);
   const nextSlide = () => goTo(currentIndex + 1);
 
-  // Autoplay (mati kalau pengguna memilih reduced motion)
+  
   useEffect(() => {
     if (paused || total < 2) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -44,7 +44,7 @@ export default function Services() {
 
   useEffect(() => () => clearTimeout(resumeTimer.current), []);
 
-  // --- Gesture: satu set handler untuk mouse, touch, dan trackpad ---
+  
   const handlePointerDown = (e) => {
     clearTimeout(resumeTimer.current);
     setPaused(true);
@@ -66,13 +66,13 @@ export default function Services() {
       if (deltaX.current < -SWIPE_DISTANCE) nextSlide();
       else if (deltaX.current > SWIPE_DISTANCE) prevSlide();
     }
-    // Di layar sentuh tidak ada "mouse leave", jadi autoplay dilanjutkan lewat timer
+  
     if (e?.pointerType && e.pointerType !== "mouse") {
       resumeTimer.current = setTimeout(() => setPaused(false), RESUME_AFTER_TOUCH_MS);
     }
   };
 
-  // Cegah klik (link / pilih kartu) yang tidak sengaja terjadi setelah drag
+ 
   const handleClickCapture = (e) => {
     if (didDrag.current) {
       e.preventDefault();

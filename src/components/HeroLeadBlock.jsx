@@ -7,7 +7,7 @@ const services = [
   "Entertainment",
 ];
 
-// Pengganti daftar layanan + dua tombol di hero halaman utama.
+
 export default function HeroLeadBlock() {
   return (
     <div className="w-full max-w-xl mx-auto">

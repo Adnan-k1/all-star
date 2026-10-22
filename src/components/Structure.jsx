@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { teamData } from "../data/companyData";
 import { useLanguage } from "../context/LanguageContext";
 
-// Lebar & jumlah kolom menyesuaikan banyaknya orang
+
 const GRID_BY_COUNT = {
   1: "max-w-sm grid-cols-1",
   2: "max-w-3xl grid-cols-1 sm:grid-cols-2",
@@ -16,7 +16,7 @@ export default function Structure() {
   const { t } = useLanguage();
   const [selected, setSelected] = useState(null);
 
-  // Jabatan & deskripsi: terjemahan per id (ceo / angka), cadangannya teks dari data
+  
   const mText = (m, k) => t(`team.${m.id}.${k}`, m[k] ?? "");
 
   const members = [
@@ -24,7 +24,7 @@ export default function Structure() {
     ...directors.map((d) => ({ ...d, tier: "director" })),
   ];
 
-  // Esc menutup profil
+  
   useEffect(() => {
     if (!selected) return;
     const onKey = (e) => e.key === "Escape" && setSelected(null);

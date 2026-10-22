@@ -11,7 +11,7 @@ function getInitialLang() {
   } catch {
     /* localStorage bisa diblokir, abaikan */
   }
-  // Pertama kali buka: ikuti bahasa browser
+  
   return navigator.language?.toLowerCase().startsWith("id") ? "id" : "en";
 }
 
@@ -35,7 +35,7 @@ export function LanguageProvider({ children }) {
     document.documentElement.lang = lang;
   }, [lang]);
 
-  // Jika kunci belum diterjemahkan, jatuh ke bahasa Inggris, lalu ke fallback
+  
   const t = useCallback(
     (key, fallback) => lookup(translations[lang], key) ?? lookup(translations.en, key) ?? fallback ?? key,
     [lang]

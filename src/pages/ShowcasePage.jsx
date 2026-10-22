@@ -82,7 +82,7 @@ export default function ShowcasePage() {
   const [activeCategory, setActiveCategory] = useState("All Works");
   const [visible, setVisible] = useState(PAGE_SIZE);
   const [lightbox, setLightbox] = useState(null);
-  const [ratios, setRatios] = useState({}); // rasio asli foto (lebar / tinggi) setelah dimuat
+  const [ratios, setRatios] = useState({});
   const reduce = useReducedMotion();
   const { t, lang } = useLanguage();
   const services = t("showcase.services");
@@ -108,7 +108,6 @@ export default function ShowcasePage() {
   const shownPhotos = filteredPhotos.slice(0, visible);
   const photoLabel = (p) => p.caption || categoryLabel(p.category);
 
-  // Satu-satunya momen animasi otomatis: judul hero muncul per baris
   const line = (i) => ({
     initial: reduce ? false : { y: "100%" },
     animate: { y: 0 },
